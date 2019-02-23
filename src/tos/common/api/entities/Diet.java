@@ -1,6 +1,7 @@
+// TODO: 2019-02-23 map name() to getApiParameter() 
 package tos.common.api.entities;
 
-public enum DietLabels {
+public enum Diet {
     balanced("Balanced", "balanced", "Protein/Fat/Carb values in 15/35/50 ratio"),
     high_fiber("High-Fiber", "high-fiber", "More than 5g fiber per serving"),
     high_protein("High-Protein", "high-protein", "More than 50% of total calories from proteins"),
@@ -12,7 +13,7 @@ public enum DietLabels {
     private final String apiParameter;
     private final String definition;
 
-    DietLabels(String label, String apiParameter, String definition) {
+    Diet(String label, String apiParameter, String definition) {
         this.label = label;
         this.apiParameter = apiParameter;
         this.definition = definition;

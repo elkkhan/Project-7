@@ -1,6 +1,6 @@
 package tos.common.api.entities;
 
-public enum HealthLabels {
+public enum Health {
     alcohol_free("Alcohol-free", "alcohol_free", "No alcohol used or contained"),
     celery_free("Celery-free", "celery_free", "does not contain celery or derivatives"),
     crustacean_free("Crustacean-free", "crustacean_free",
@@ -41,7 +41,7 @@ public enum HealthLabels {
     private final String apiParameter;
     private final String definition;
 
-    HealthLabels(String label, String apiParameter, String definition) {
+    Health(String label, String apiParameter, String definition) {
         this.label = label;
         this.apiParameter = apiParameter;
         this.definition = definition;
