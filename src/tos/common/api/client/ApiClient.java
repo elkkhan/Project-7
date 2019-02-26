@@ -1,28 +1,47 @@
+/* TODO: 2019-02-26
+ *   Parse the GET response into a Recipe object.
+ *   Additional object like Ingredient and NutrientInfo also need to be parsed
+ *   Take care of the case when the GET request returns null
+ *   Test everything
+ * */
 package tos.common.api.client;
 
-import tos.common.api.client.query.ApiQuery;
 import tos.common.api.connection.ConnectionManager;
 import tos.common.api.exceptions.ConnectionException;
+import tos.common.api.query.ApiQuery;
+import tos.common.api.query.ApiQueryBuilder;
 
-public class InternalApiClient {
+public class ApiClient {
 
+    public static final String BASE_PATH = "https://api.edamam.com/search?";
     private static ConnectionManager connectionManager;
-    private final String APPLICATION_ID;
-    private final String APPLICATION_KEYS;
-    public static final String BASE_PATH =  "https://api.edamam.com/search?";
+    private final static String APPLICATION_ID = "a975f036";
+    private final static String APPLICATION_KEYS = "ec3265c79b41917d82e0379765cdb5ca";
 
-    private InternalApiClient(String APPLICATION_ID, String APPLICATION_KEYS) {
-        this.APPLICATION_ID = APPLICATION_ID;
-        this.APPLICATION_KEYS = APPLICATION_KEYS;
+    public ApiClient() {
         connectionManager = new ConnectionManager();
     }
 
-    public static InternalApiClient create(String APPLICATION_ID, String APPLICATION_KEYS) {
-        return new InternalApiClient(APPLICATION_ID, APPLICATION_KEYS);
+    /**
+     * @return base path for the API requests
+     */
+    public static String getBasePath() {
+        return BASE_PATH;
     }
 
-    @Deprecated public String makeSimpleQuery(ApiQuery query) throws ConnectionException {
+    /**
+     * Initializes an ApiQueryBuilder with app_id, app_keys and search query for "q" parameter
+     *
+     * @param searchQuery Search text, value for "q" parameter
+     * @return a constructed ApiQueryBuilder
+     */
+    public ApiQueryBuilder createQuery(String searchQuery) {
+        return new ApiQueryBuilder(APPLICATION_ID, APPLICATION_KEYS, searchQuery);
+    }
+
+    @Deprecated
+//this is just for testing, actual executeQuery should parse the response into a Recipe object
+    public String executeQuery(ApiQuery query) throws ConnectionException {
         return connectionManager.executeGetRequest(query.toString()).getResponseContent();
     }
-
 }

@@ -1,4 +1,3 @@
-// TODO: 2019-02-23 map name() to getApiParameter() 
 package tos.common.api.entities;
 
 public enum Diet {
@@ -13,13 +12,18 @@ public enum Diet {
     private final String apiParameter;
     private final String definition;
 
+    /**
+     * @param label Human-presentable value
+     * @param apiParameter parameter name accepted by the API
+     * @param definition diet description
+     */
     Diet(String label, String apiParameter, String definition) {
         this.label = label;
         this.apiParameter = apiParameter;
         this.definition = definition;
     }
 
-    public String getaApiParameter() {
+    public String getApiParameter() {
         return apiParameter;
     }
 

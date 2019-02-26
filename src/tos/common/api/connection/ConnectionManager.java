@@ -29,8 +29,7 @@ public class ConnectionManager {
     private final CloseableHttpClient connection = getCloseableHttpClient();
 
     /**
-     * @return an apache http client, sets SSL trust strategy to trust everything, because the
-     * certificates from cm are self-signed
+     * @return an apache http client, sets SSL trust strategy to trust everything
      */
     private CloseableHttpClient getCloseableHttpClient() {
         try {
@@ -61,6 +60,7 @@ public class ConnectionManager {
     }
 
     /**
+     * Executes a GET request against the url and returns a new ConnectionResponse object
      * @param url url to send a get request to
      * @return content of the response
      */

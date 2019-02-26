@@ -1,6 +1,8 @@
-package tos.common.api.client.query;
+package tos.common.api.query;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.collections4.map.MultiValueMap;
 import org.jetbrains.annotations.NotNull;
@@ -13,19 +15,17 @@ public class ApiQuery {
     final String QUERY;
     final String APP_ID;
     final String APP_KEY;
-    String FROM;
-    String TO;
-    String INGR;
-    String DIET;
-    List<String> HEALTH;
-    String CALORIES_FROM;
-    String CALORIES_TO;
-    String TIME_FROM;
-    String TIME_TO;
-    List<String> EXCLUDED;
-
+    //@formatter:off
+    String FROM           = null;
+    String TO             = null;
+    String INGR           = null;
+    String DIET           = null;
+    List<String> HEALTH   = new ArrayList<>();
+    String CALORIES       = null;
+    String TIME           = null;
+    List<String> EXCLUDED = new ArrayList<>();
+    //@formatter:on
     String encodedQuery;
-    MultiMap<String, String> parameterValues = new MultiValueMap<>();
 
     ApiQuery(@NotNull String api_id, @NotNull String api_key, @NotNull String qSearch) {
         this.APP_ID = api_id;
@@ -33,133 +33,140 @@ public class ApiQuery {
         this.QUERY = qSearch;
     }
 
-//    private MultiValueMap<String, String> getParameterMapping() throws QueryBuilderException {
-//
-//    }
-
-    private String validateFrom() throws QueryBuilderException {
-        if (FROM == null) {
-            return null;
+    MultiMap<String, String> mapParameters() throws QueryBuilderException {
+        validateQuery();
+        MultiMap<String, String> parameterValues = new MultiValueMap<>();
+        parameterValues.put("from", FROM);
+        parameterValues.put("to", TO);
+        parameterValues.put("ingr", INGR);
+        parameterValues.put("diet", DIET);
+        parameterValues.put("calories", CALORIES);
+        parameterValues.put("time", TIME);
+        for (String healthLabel : HEALTH) {
+            parameterValues.put("health", healthLabel);
         }
-        int fromValue;
-        try {
-            fromValue = Integer.parseInt(FROM);
-        } catch (NumberFormatException e) {
-            throw new QueryBuilderException("FROM parameter is not a number: " + FROM);
+        for (String excludedFood : EXCLUDED) {
+            parameterValues.put("excluded", excludedFood);
         }
-        if (fromValue < 0) {
-            throw new QueryBuilderException("FROM parameter is negative: " + FROM);
-        }
-        return FROM;
+        return parameterValues;
     }
 
-    private String validateTo() throws QueryBuilderException {
+    private void validateQuery() throws QueryBuilderException {
+        if (!validateFrom()) {
+            throw new QueryBuilderException("FROM parameter value is invalid: " + FROM);
+        }
+        if (!validateTo()) {
+            throw new QueryBuilderException("TO parameter value is invalid: " + TO);
+        }
+        if (!validateIngr()) {
+            throw new QueryBuilderException("INGR parameter is invalid: " + INGR);
+        }
+        if (!validateDiet()) {
+            throw new QueryBuilderException("DIET parameter is invalid: " + DIET);
+        }
+        if (HEALTH != null) {
+            for (String healthLabel : HEALTH) {
+                if (!validateHealth(healthLabel)) {
+                    throw new QueryBuilderException("HEALTH parameter is invalid: " + healthLabel);
+                }
+            }
+        }
+        if (!validateCalories()) {
+            throw new QueryBuilderException("CALORIES parameter is invalid: " + CALORIES);
+        }
+        if (!validateTime()) {
+            throw new QueryBuilderException("TIME parameter is invalid: " + TIME);
+        }
+    }
+
+    private boolean validateFrom() {
+        return validateFromOrIngr(FROM);
+    }
+
+    private boolean validateTo() {
         if (TO == null) {
-            return null;
+            return true;
         }
         int toValue;
         try {
             toValue = Integer.parseInt(TO);
+            if (toValue < Integer.parseInt(FROM)) {
+                return false;
+            }
         } catch (NumberFormatException e) {
-            throw new QueryBuilderException("TO parameter is not a number: " + TO);
+            return false;
         }
-        if (toValue < 0) {
-            throw new QueryBuilderException("TO parameter is negative: " + TO);
-        }
-        if (FROM != null && toValue < Integer.valueOf(FROM)) {
-            throw new QueryBuilderException(
-                "TO parameter value is less than FROM parameter value: " + TO + "<" + FROM);
-        }
-        return TO;
+        return true;
     }
 
-    private String validateIngr() throws QueryBuilderException {
-        if (INGR == null) {
-            return null;
+    private boolean validateIngr() {
+        return validateFromOrIngr(INGR);
+    }
+
+    private boolean validateDiet() {
+        if (DIET == null) {
+            return true;
+        }
+        for (Diet dietEnum : Diet.values()) {
+            if (DIET.equals(dietEnum.getApiParameter())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean validateHealth(String healthLabel) {
+        for (Health healthEnum : Health.values()) {
+            if (healthLabel.equals(healthEnum.getApiParameter())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean validateCalories() {
+        return validateCaloriesOrTime(CALORIES);
+    }
+
+    private boolean validateTime() {
+        return validateCaloriesOrTime(TIME);
+    }
+
+    private boolean validateCaloriesOrTime(String caloriesOrTime) {
+        if (caloriesOrTime == null) {
+            return true;
+        }
+        Pattern pattern1 = Pattern.compile("^\\d+$");//123
+        Pattern pattern2 = Pattern.compile("^\\d+\\+$");//123+
+        Pattern pattern3 = Pattern.compile("^\\d+-\\d+$");//123-456
+        if (pattern1.matcher(caloriesOrTime).matches() || pattern2.matcher(caloriesOrTime)
+            .matches()) {
+            return true;
+        }
+        if (pattern3.matcher(caloriesOrTime).matches()) {
+            int from = Integer.parseInt(caloriesOrTime.substring(0, caloriesOrTime.indexOf("-")));
+            int to = Integer.parseInt(caloriesOrTime.substring(caloriesOrTime.indexOf("-")));
+            return from <= to;
+        }
+        return true;
+    }
+
+    private boolean validateFromOrIngr(String fromOrIngr) {
+        if (fromOrIngr == null) {
+            return true;
         }
         int ingrValue;
         try {
-            ingrValue = Integer.parseInt(INGR);
+            ingrValue = Integer.parseInt(fromOrIngr);
+            if (ingrValue < 1) {
+                return false;
+            }
         } catch (NumberFormatException e) {
-            throw new QueryBuilderException("INGR parameter is not a number: " + INGR);
+            return false;
         }
-        if (ingrValue < 0) {
-            throw new QueryBuilderException("INGR value is negative: " + INGR);
-        }
-        return INGR;
+        return true;
     }
 
-    private String validateDiet() throws QueryBuilderException {
-        if (DIET == null) {
-            return null;
-        }
-        for (Diet diet : Diet.values()) {
-            if (diet.getaApiParameter().equals(DIET)) {
-                return DIET;
-            }
-        }
-        throw new QueryBuilderException("DIET parameter value is not a valid diet: " + DIET);
-    }
-
-    private List<String> validateHealth() throws QueryBuilderException {
-        if (HEALTH == null) {
-            return null;
-        }
-        for (String healthLabel : HEALTH) {
-            boolean valid = false;
-            for (Health healthEnum : Health.values()) {
-                if (healthLabel.equals(healthEnum.getaApiParameter())) {
-                    valid = true;
-                    break;
-                }
-            }
-            if (!valid) {
-                throw new QueryBuilderException(
-                    "HEALTH parameter is not a valid health label: " + healthLabel);
-            }
-        }
-        return HEALTH;
-    }
-
-    private String validateCalories() throws QueryBuilderException {
-        if (CALORIES_TO == null && CALORIES_FROM == null) {
-            return null;
-        }
-        StringBuilder calories = new StringBuilder();
-        Integer caloriesFrom = null;
-        Integer caloriesTo = null;
-        if (CALORIES_FROM != null) {
-            try {
-                caloriesFrom = Integer.parseInt(FROM);
-            } catch (NumberFormatException e) {
-                throw new QueryBuilderException(
-                    "CALORIES parameter is not a number: " + CALORIES_FROM);
-            }
-        }
-        if (CALORIES_TO != null) {
-            try {
-                caloriesTo = Integer.parseInt(CALORIES_TO);
-            } catch (NumberFormatException e) {
-                throw new QueryBuilderException(
-                    "CALORIES parameter is not a number: " + CALORIES_TO);
-            }
-        }
-
-        if (caloriesFrom != null) {
-            calories.append(CALORIES_FROM);
-            if (caloriesTo != null) {
-                calories.append("-");
-            }
-        }
-        if (caloriesTo != null) {
-            calories.append(CALORIES_TO);
-        }
-        return calories.toString();
-    }
-
-    private String validateTime() {
-        
-    }
 
     @Override
     public String toString() {

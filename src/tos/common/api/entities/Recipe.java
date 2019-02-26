@@ -32,4 +32,52 @@ public class Recipe {
         this.dietLabels = dietLabels;
         this.healthLabels = healthLabels;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public Integer getYield() {
+        return yield;
+    }
+
+    public Float getCalories() {
+        return calories;
+    }
+
+    public Float getTotalWeight() {
+        return totalWeight;
+    }
+
+    public Ingredient[] getIngredients() {
+        return ingredients;
+    }
+
+    public NutrientInfo[] getTotalNutrients() {
+        return totalNutrients;
+    }
+
+    public NutrientInfo[] getTotalDaily() {
+        return totalDaily;
+    }
+
+    public Diet[] getDietLabels() {
+        return dietLabels;
+    }
+
+    public Health[] getHealthLabels() {
+        return healthLabels;
+    }
 }

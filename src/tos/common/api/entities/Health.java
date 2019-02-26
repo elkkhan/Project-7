@@ -41,13 +41,18 @@ public enum Health {
     private final String apiParameter;
     private final String definition;
 
+    /**
+     * @param label Human-presentable value
+     * @param apiParameter parameter name accepted by the API
+     * @param definition diet description
+     */
     Health(String label, String apiParameter, String definition) {
         this.label = label;
         this.apiParameter = apiParameter;
         this.definition = definition;
     }
 
-    public String getaApiParameter() {
+    public String getApiParameter() {
         return apiParameter;
     }
 
