@@ -1,8 +1,3 @@
-/* TODO: 2019-02-24
- *   - DOCUMENTATION
- *   - Check all set options for validity in build()
- * */
-
 package tos.common.api.query;
 
 import java.net.URISyntaxException;

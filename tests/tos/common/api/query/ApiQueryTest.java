@@ -1,25 +1,26 @@
 package tos.common.api.query;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.Test;
+import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
 import tos.common.api.client.ApiClient;
 
-public class ApiQueryTest {
+class ApiQueryTest {
 
     private final ApiClient apiClient = new ApiClient();
 
     @Test
-    public void simpleQueryBuildTest() {
+    @SuppressWarnings("unused")
+    void simpleQueryBuildTest() {
         try {
-            String search = "chicken";
+            String search = "chicken wings";
             ApiQuery chickenQuery = apiClient.createQuery(search).setFrom("5")
                 .setCalories("500", null).build();
             String response = apiClient.executeQuery(chickenQuery);
-            assertFalse(response.toLowerCase().contains("error"));
+            JSONObject responseJson = new JSONObject(response);
         } catch (Exception e) {
-            e.printStackTrace();
+            fail("Not a JSON response");
         }
-
     }
 }

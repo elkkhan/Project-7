@@ -61,6 +61,7 @@ public class ConnectionManager {
 
     /**
      * Executes a GET request against the url and returns a new ConnectionResponse object
+     *
      * @param url url to send a get request to
      * @return content of the response
      */
