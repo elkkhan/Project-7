@@ -2,6 +2,7 @@ package tos.common.api.connection;
 
 import java.util.Arrays;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ConnectionResponse {
@@ -12,7 +13,7 @@ public class ConnectionResponse {
 
   ConnectionResponse(
       @Nullable String finalRedirectUrl,
-      @Nullable String responseContent,
+      @NotNull String responseContent,
       @Nullable Integer responseCode) {
     this.finalRedirectUrl = finalRedirectUrl;
     this.responseContent = responseContent;
@@ -30,7 +31,7 @@ public class ConnectionResponse {
   /**
    * @return full content of GET request response
    */
-  @Nullable
+  @NotNull
   public String getResponseContent() {
     return responseContent;
   }
@@ -38,11 +39,8 @@ public class ConnectionResponse {
   /**
    * @return full content of GET request response parsed into a List<String> line-by-line
    */
-  @Nullable
+  @NotNull
   public List<String> getResponseContentAsList() {
-    if (responseContent == null) {
-      return null;
-    }
     return Arrays.asList(responseContent.split("\r\n|\r|\n"));
   }
 

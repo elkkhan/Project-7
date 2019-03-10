@@ -1,54 +1,27 @@
 package tos.common.api.entities;
 
+import java.util.Arrays;
+
 public class Recipe {
 
-  private final String uri;
-  private final String label;
-  private final String imageUrl;
-  private final String source;
-  private final String shareAs;
-  private final Double yield;
-  private final Diet[] dietLabels;
-  private final Health[] healthLabels;
-  private final String[] cautions;
-  private final String[] ingredientLines;
-  private final Ingredient[] ingredients;
-  private final Double calories;
-  private final Double totalWeight;
-  private final Double totalTime;
-  private final NutrientInfo[] totalNutrients;
+  private String uri;
+  private String label;
+  private String imageUrl;
+  private String source;
+  private Double yield;
+  private Diet[] dietLabels;
+  private Health[] healthLabels;
+  private Ingredient[] ingredients;
+  private Double calories;
+  private Double totalWeight;
+  private Double totalTime;
+  private NutrientInfo[] totalNutrients;
 
-  public Recipe(
-      String uri,
-      String label,
-      String imageUrl,
-      String source,
-      String shareAs,
-      Double yield,
-      Diet[] dietLabels,
-      Health[] healthLabels,
-      String[] cautions,
-      String[] ingredientLines,
-      Ingredient[] ingredients,
-      Double calories,
-      Double totalWeight,
-      Double totalTime,
-      NutrientInfo[] totalNutrients) {
-    this.uri = uri;
-    this.label = label;
-    this.imageUrl = imageUrl;
-    this.source = source;
-    this.shareAs = shareAs;
-    this.yield = yield;
-    this.dietLabels = dietLabels;
-    this.healthLabels = healthLabels;
-    this.cautions = cautions;
-    this.ingredientLines = ingredientLines;
-    this.ingredients = ingredients;
-    this.calories = calories;
-    this.totalWeight = totalWeight;
-    this.totalTime = totalTime;
-    this.totalNutrients = totalNutrients;
+  private Recipe() {
+  }
+
+  public static Builder builder() {
+    return new Builder();
   }
 
   public String getUri() {
@@ -67,10 +40,6 @@ public class Recipe {
     return source;
   }
 
-  public String getShareAs() {
-    return shareAs;
-  }
-
   public Double getYield() {
     return yield;
   }
@@ -81,14 +50,6 @@ public class Recipe {
 
   public Health[] getHealthLabels() {
     return healthLabels;
-  }
-
-  public String[] getCautions() {
-    return cautions;
-  }
-
-  public String[] getIngredientLines() {
-    return ingredientLines;
   }
 
   public Ingredient[] getIngredients() {
@@ -109,5 +70,96 @@ public class Recipe {
 
   public NutrientInfo[] getTotalNutrients() {
     return totalNutrients;
+  }
+
+  @Override
+  public String toString() {
+    return "Recipe{" +
+        "uri='" + uri + '\'' +
+        ", label='" + label + '\'' +
+        ", imageUrl='" + imageUrl + '\'' +
+        ", source='" + source + '\'' +
+        ", yield=" + yield +
+        ", dietLabels=" + Arrays.toString(dietLabels) +
+        ", healthLabels=" + Arrays.toString(healthLabels) +
+        ", ingredients=" + Arrays.toString(ingredients) +
+        ", calories=" + calories +
+        ", totalWeight=" + totalWeight +
+        ", totalTime=" + totalTime +
+        ", totalNutrients=" + Arrays.toString(totalNutrients) +
+        '}';
+  }
+
+  public static class Builder {
+
+    private Builder() {
+    }
+
+    private Recipe recipe = new Recipe();
+
+    public Builder setUri(String uri) {
+      this.recipe.uri = uri;
+      return this;
+    }
+
+    public Builder setLabel(String label) {
+      this.recipe.label = label;
+      return this;
+    }
+
+    public Builder setImageUrl(String imageUrl) {
+      this.recipe.imageUrl = imageUrl;
+      return this;
+    }
+
+    public Builder setSource(String source) {
+      this.recipe.source = source;
+      return this;
+    }
+
+    public Builder setYield(Double yield) {
+      this.recipe.yield = yield;
+      return this;
+    }
+
+    public Builder setDietLabels(Diet[] dietLabels) {
+      this.recipe.dietLabels = dietLabels;
+      return this;
+    }
+
+    public Builder setHealthLabels(Health[] healthLabels) {
+      this.recipe.healthLabels = healthLabels;
+      return this;
+    }
+
+    public Builder setIndredients(Ingredient[] indredients) {
+      this.recipe.ingredients = indredients;
+      return this;
+    }
+
+    public Builder setCalories(Double calories) {
+      this.recipe.calories = calories;
+      return this;
+    }
+
+    public Builder setTotalWeight(Double totalWeight) {
+      this.recipe.totalWeight = totalWeight;
+      return this;
+    }
+
+    public Builder setTotalTime(Double totalTime) {
+      this.recipe.totalTime = totalTime;
+      return this;
+    }
+
+    @Deprecated
+    public Builder setNutrientInfo(NutrientInfo[] totalNutrients) {
+      this.recipe.totalNutrients = totalNutrients;
+      return this;
+    }
+
+    public Recipe build() {
+      return this.recipe;
+    }
   }
 }

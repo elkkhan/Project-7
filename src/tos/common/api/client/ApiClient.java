@@ -9,7 +9,7 @@ package tos.common.api.client;
 import tos.common.api.connection.ConnectionManager;
 import tos.common.api.exceptions.ConnectionException;
 import tos.common.api.query.ApiQuery;
-import tos.common.api.query.ApiQueryBuilder;
+import tos.common.api.query.ApiQuery.Builder;
 
 public class ApiClient {
 
@@ -26,13 +26,13 @@ public class ApiClient {
   }
 
   /**
-   * Initializes an ApiQueryBuilder with app_id, app_keys and search query for "q" parameter
+   * Initializes a {@link Builder} with app_id, app_keys and search query for "q" parameter
    *
    * @param searchQuery Search text, value for "q" parameter
-   * @return a constructed ApiQueryBuilder
+   * @return a constructed {@link Builder}
    */
-  public ApiQueryBuilder createQuery(String searchQuery) {
-    return new ApiQueryBuilder(APPLICATION_ID, APPLICATION_KEYS, searchQuery);
+  public Builder createQuery(String searchQuery) {
+    return new Builder(APPLICATION_ID, APPLICATION_KEYS, searchQuery);
   }
 
   @Deprecated
@@ -40,4 +40,12 @@ public class ApiClient {
   public String executeQuery(ApiQuery query) throws ConnectionException {
     return connectionManager.executeGetRequest(query.toString()).getResponseContent();
   }
+
+  /*public Recipe executeQuery(ApiQuery query) throws ConnectionException {
+    String queryString = query.toString();
+    ConnectionResponse connectionResponse = connectionManager.executeGetRequest(queryString);
+    String queryResponse = connectionResponse.getResponseContent();
+    Recipe recipe = ApiRecipeParser.parse(queryResponse);
+    return recipe;
+  }*/
 }

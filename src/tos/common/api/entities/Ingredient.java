@@ -1,6 +1,6 @@
 package tos.common.api.entities;
 
-class Ingredient {
+public class Ingredient {
 
   private final String text;
   private final Float weight;
@@ -19,4 +19,11 @@ class Ingredient {
   }
 
 
+  @Override
+  public String toString() {
+    return "Ingredient{" +
+        "text='" + text + '\'' +
+        ", weight=" + weight +
+        '}';
+  }
 }

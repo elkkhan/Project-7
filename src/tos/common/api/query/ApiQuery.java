@@ -1,40 +1,46 @@
-// TODO: 2019-03-03: FROM parameter should default to 0.
+// FIXME: 2019-03-03: FROM parameter should default to 0.
+
 package tos.common.api.query;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.collections4.map.MultiValueMap;
+import org.apache.http.client.utils.URIBuilder;
 import org.jetbrains.annotations.NotNull;
+import tos.common.api.client.ApiClient;
 import tos.common.api.entities.Diet;
 import tos.common.api.entities.Health;
 import tos.common.api.exceptions.QueryBuilderException;
 
 public class ApiQuery {
 
-  final String QUERY;
-  final String APP_ID;
-  final String APP_KEY;
+  private final String QUERY;
+  private final String APP_ID;
+  private final String APP_KEY;
   //@formatter:off
-    String FROM           = null;
-    String TO             = null;
-    String INGR           = null;
-    String DIET           = null;
-    String CALORIES       = null;
-    String TIME           = null;
-    List<String> HEALTH   = new ArrayList<>();
-    List<String> EXCLUDED = new ArrayList<>();
-    //@formatter:on
-    String encodedQuery;
+  private String FROM           = null;
+  private String TO             = null;
+  private String INGR           = null;
+  private String DIET           = null;
+  private String CALORIES       = null;
+  private String TIME           = null;
+  private String encodedQuery   = null;
+  private List<String> HEALTH   = new ArrayList<>();
+  private List<String> EXCLUDED = new ArrayList<>();
+  //@formatter:on
 
-  ApiQuery(@NotNull String api_id, @NotNull String api_key, @NotNull String qSearch) {
+  private ApiQuery(@NotNull String api_id, @NotNull String api_key, @NotNull String qSearch) {
     this.APP_ID = api_id;
     this.APP_KEY = api_key;
     this.QUERY = qSearch;
   }
 
-  MultiMap<String, String> mapParameters() throws QueryBuilderException {
+
+  private MultiMap<String, String> mapParameters() throws QueryBuilderException {
     validateQuery();
     MultiMap<String, String> parameterValues = new MultiValueMap<>();
     parameterValues.put("from", FROM);
@@ -172,5 +178,97 @@ public class ApiQuery {
   @Override
   public String toString() {
     return encodedQuery;
+  }
+
+
+  public static class Builder {
+
+    private final ApiQuery apiQuery;
+
+    public Builder(@NotNull String api_id, @NotNull String api_key,
+        @NotNull String qSearch) {
+      this.apiQuery = new ApiQuery(api_id, api_key, qSearch);
+    }
+
+    public Builder setFrom(@NotNull String from) {
+      this.apiQuery.FROM = from;
+      return this;
+    }
+
+    public Builder setTo(@NotNull String to) {
+      this.apiQuery.TO = to;
+      return this;
+    }
+
+    public Builder setIngr(@NotNull String ingr) {
+      this.apiQuery.INGR = ingr;
+      return this;
+    }
+
+    public Builder setDiet(@NotNull String dietParameter) {
+      this.apiQuery.DIET = dietParameter;
+      return this;
+    }
+
+    public Builder addHealth(@NotNull String healthParameter) {
+      this.apiQuery.HEALTH.add(healthParameter);
+      return this;
+    }
+
+    public Builder setCalories(String min, String max) {
+      if (min != null && max != null) {
+        this.apiQuery.CALORIES = min + "-" + max;
+      } else if (min == null && max != null) {
+        this.apiQuery.CALORIES = max;
+      } else {
+        this.apiQuery.CALORIES = min + "+";
+      }
+      return this;
+    }
+
+    public Builder setTime(String min, String max) {
+      if (min != null && max != null) {
+        this.apiQuery.TIME = min + "-" + max;
+      } else if (min == null && max != null) {
+        this.apiQuery.TIME = max;
+      } else {
+        this.apiQuery.TIME = min + "+";
+      }
+      return this;
+    }
+
+    public Builder addExclude(@NotNull String excluded) {
+      this.apiQuery.EXCLUDED.add(excluded);
+      return this;
+    }
+
+    /**
+     * Build the query. Must be called for a query to be properly built
+     *
+     * @return a query ready to be executed
+     * @throws QueryBuilderException if the base path is malformed
+     */
+    public ApiQuery build() throws QueryBuilderException {
+      try {
+        URIBuilder builder = new URIBuilder(ApiClient.getBasePath());
+        builder.addParameter("q", this.apiQuery.QUERY);
+        builder.addParameter("app_id", this.apiQuery.APP_ID);
+        builder.addParameter("app_key", this.apiQuery.APP_KEY);
+        MultiMap<String, String> parameterValueMapping = this.apiQuery.mapParameters();
+        for (String parameterName : parameterValueMapping.keySet()) {
+          Collection parameterValues = (Collection) parameterValueMapping.get(parameterName);
+          for (Object parameterValue : parameterValues) {
+            String _parameterValue = (String) parameterValue;
+            if (parameterValue != null) {
+              builder.addParameter(parameterName, _parameterValue);
+            }
+          }
+        }
+        this.apiQuery.encodedQuery = builder.build().toString();
+      } catch (URISyntaxException e) {
+        throw new QueryBuilderException(e.getMessage());
+      }
+      return this.apiQuery;
+    }
   }
 }

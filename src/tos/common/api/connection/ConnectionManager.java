@@ -21,16 +21,30 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import tos.common.api.exceptions.ConnectionException;
 
 public class ConnectionManager {
 
+  private final int timeoutSeconds;
   private final CloseableHttpClient connection = getCloseableHttpClient();
 
   /**
-   * @return an apache http client, sets SSL trust strategy to trust everything
+   * Default constructor, 30 seconds timeout
    */
+  public ConnectionManager() {
+    timeoutSeconds = 30;
+  }
+
+  /**
+   * Constructor for custom timeout value
+   *
+   * @param timeoutSeconds timeout value in seconds
+   */
+  public ConnectionManager(final int timeoutSeconds) {
+    this.timeoutSeconds = timeoutSeconds;
+  }
+
+  /** @return an apache http client, set SSL trust strategy to trust everything */
   private CloseableHttpClient getCloseableHttpClient() {
     try {
       return HttpClients.custom()
@@ -49,24 +63,25 @@ public class ConnectionManager {
 
   /**
    * @return timeout configuration, set to 30 seconds. program should not wait for more than 30
-   * seconds for a url to respond.
+   *     seconds for a url to respond.
    */
   private RequestConfig getTimeoutConfig() {
     RequestConfig.Builder config = RequestConfig.custom();
-    config.setConnectTimeout(30 * 1000);
-    config.setConnectionRequestTimeout(30 * 1000);
-    config.setSocketTimeout(30 * 1000);
+    config.setConnectTimeout(timeoutSeconds * 1000);
+    config.setConnectionRequestTimeout(timeoutSeconds * 1000);
+    config.setSocketTimeout(timeoutSeconds * 1000);
     return config.build();
   }
 
   /**
-   * Executes a GET request against the url and returns a new ConnectionResponse object
+   * Executes a GET request against the url and returns a new {@link ConnectionResponse} object
    *
    * @param url url to send a get request to
    * @return content of the response
    */
-  @Nullable
-  public ConnectionResponse executeGetRequest(@NotNull String url) throws ConnectionException {
+  @NotNull
+  public ConnectionResponse executeGetRequest(@NotNull final String url)
+      throws ConnectionException {
     HttpEntity entity;
     String entityContent;
     String finalUrl;

@@ -109,6 +109,7 @@ public enum Health {
       "wheat-free",
       "No wheat, can have gluten though");
 
+  private static final Health[] ALL_VALUES = Health.values();
   private final String label;
   private final String apiParameter;
   private final String definition;
@@ -122,6 +123,25 @@ public enum Health {
     this.label = label;
     this.apiParameter = apiParameter;
     this.definition = definition;
+  }
+
+  public static Health getByLabel(String label) {
+    for (Health health : ALL_VALUES) {
+      if (health.label.equals(label)
+          || health.apiParameter.equalsIgnoreCase(label)) {
+        return health;
+      }
+    }
+    return null;
+  }
+
+  public static Health getByApiParameter(String apiParameter) {
+    for (Health health : ALL_VALUES) {
+      if (health.apiParameter.equals(apiParameter)) {
+        return health;
+      }
+    }
+    return null;
   }
 
   public String getApiParameter() {

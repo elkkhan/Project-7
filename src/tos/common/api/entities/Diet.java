@@ -26,6 +26,7 @@ public enum Diet {
       "low-sodium",
       "Less than 140mg Na per serving");
 
+  private static Diet[] ALL_VALUES = Diet.values();
   private final String label;
   private final String apiParameter;
   private final String definition;
@@ -39,6 +40,24 @@ public enum Diet {
     this.label = label;
     this.apiParameter = apiParameter;
     this.definition = definition;
+  }
+
+  public static Diet getByLabel(String label) {
+    for (Diet diet : ALL_VALUES) {
+      if (diet.label.equals(label)) {
+        return diet;
+      }
+    }
+    return null;
+  }
+
+  public static Diet getByApiParameter(String apiParameter) {
+    for (Diet diet : ALL_VALUES) {
+      if (diet.apiParameter.equals(apiParameter)) {
+        return diet;
+      }
+    }
+    return null;
   }
 
   public String getApiParameter() {
