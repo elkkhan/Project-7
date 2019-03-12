@@ -8,3 +8,4 @@ public class Users extends Person {
         super(name, surname, id, age, email, salt);
     }
 }
+
