@@ -41,7 +41,6 @@ public class MainPageController implements Initializable {
         URL maincss = getResourcePath("src", "tos", "gui", "view", "newstyle.css");
         try {
             Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
-            // Parent root = loader.load();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(maincss.toExternalForm());
             Stage primaryStage = new Stage();
