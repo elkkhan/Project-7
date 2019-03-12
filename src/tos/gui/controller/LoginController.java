@@ -9,6 +9,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
@@ -83,12 +85,13 @@ public class LoginController implements Initializable {
 		((Stage)id.getScene().getWindow()).close();
 	}*/
 
-	private void loadPage(String source) {
+	private void loadPage(String source) throws MalformedURLException {
+		URL url1 = new File("src\\tos\\gui\\view\\style.css").toURL();
 		try {
 			Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
 			// Parent root = loader.load();
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("../view/style.css").toExternalForm());
+			scene.getStylesheets().add(url1.toExternalForm());
 			Stage primaryStage = new Stage();
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);

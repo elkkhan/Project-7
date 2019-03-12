@@ -12,7 +12,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -74,12 +76,13 @@ public class RegisterController implements Initializable {
     }
 
 
-    private void loadPage(String source) {
+    private void loadPage(String source) throws MalformedURLException {
+        URL url1 = new File("src\\tos\\gui\\view\\style.css").toURL();
         try {
             Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
             // Parent root = loader.load();
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("../view/style.css").toExternalForm());
+            scene.getStylesheets().add(url1.toExternalForm());
             Stage primaryStage = new Stage();
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
