@@ -67,14 +67,21 @@ public class RegisterController implements Initializable {
     alert.showAndWait();
   }
 
+    private URL getResourcePath(String... path) throws MalformedURLException {
+        File file = new File(path[0]);
 
+        for (int i = 1; i < path.length; i++) {
+            file = new File(file, path[i]);
+        }
+        return file.toURI().toURL();
+    }
   private void loadPage(String source) throws MalformedURLException {
-    URL url1 = new File("src\\tos\\gui\\view\\newstyle.css").toURL();
+      URL mainCss = getResourcePath("src", "tos", "gui", "view", "newstyle.css");
     try {
       Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
       // Parent root = loader.load();
       Scene scene = new Scene(root);
-      scene.getStylesheets().add(url1.toExternalForm());
+        scene.getStylesheets().add(mainCss.toExternalForm());
       Stage primaryStage = new Stage();
       primaryStage.setScene(scene);
       primaryStage.setResizable(false);
