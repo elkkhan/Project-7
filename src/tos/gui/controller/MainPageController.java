@@ -1,5 +1,9 @@
 package tos.gui.controller;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,11 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable {
 
@@ -23,6 +22,7 @@ public class MainPageController implements Initializable {
     @FXML
     private Button login;
 
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -31,7 +31,7 @@ public class MainPageController implements Initializable {
     private void loadPage(String source) throws MalformedURLException {
         URL url1 = new File("src\\tos\\gui\\view\\newstyle.css").toURL();
         try {
-            Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
+            Pane root = FXMLLoader.load(getClass().getResource(source));
             Scene scene = new Scene(root);
             scene.getStylesheets().add(url1.toExternalForm());
             Stage primaryStage = new Stage();
