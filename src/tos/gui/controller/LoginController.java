@@ -20,7 +20,8 @@ import javafx.scene.control.PasswordField;
 
 public class LoginController implements Initializable {
 
-    public Button login;
+
+	public Button login;
     @FXML
 	private TextField name;
 	@FXML

@@ -25,6 +25,7 @@ import javafx.event.ActionEvent;
 public class RegisterController implements Initializable {
 
 
+
     @FXML
     private TextField name;
 
