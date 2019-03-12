@@ -1,49 +1,44 @@
 package tos.gui.controller;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
-
-
-import javafx.event.ActionEvent;
-import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-
 public class LoginController implements Initializable {
 
-    public Button login;
-    @FXML
-	private TextField name;
-	@FXML
-	private TextField surname;
 
-	@FXML
-	private TextField id;
-	@FXML
-	private PasswordField password;
-	AuthenticationManager authm;
+  public Button login;
+  AuthenticationManager authm;
+  @FXML
+  private TextField name;
+  @FXML
+  private TextField surname;
+  @FXML
+  private TextField id;
+  @FXML
+  private PasswordField password;
 
-	//Preferences pref; we will need this.
+  //Preferences pref; we will need this.
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+  @Override
+  public void initialize(URL arg0, ResourceBundle arg1) {
 
-
-	}
+  }
 
 	/*
 	@FXML
 	public void login(ActionEvent event) throws Exception {
-		
+
 		try {
 
 			if(authm.authenticateUser(id.getText(), password.getText().toCharArray())) {
@@ -52,14 +47,14 @@ public class LoginController implements Initializable {
 				closeLogin();
 				return;
 			}
-				
+
 		}catch(Exception e) {
-			
+
 			e.getStackTrace();
-			
-		
+
+
 		}
-		
+
 		try {
 
 			if(authm.authenticateAdmin(id.getText(), password.getText().toCharArray())) {
@@ -68,42 +63,42 @@ public class LoginController implements Initializable {
 				closeLogin();
 				return;
 			}
-				
+
 		}catch(Exception e) {
-			
+
 			e.getStackTrace();
-			
-		
+
+
 		}
 	}
 	*/
-	
+
 /*	 private void closeLogin() {
 		((Stage)id.getScene().getWindow()).close();
 	}*/
 
-	private void loadPage(String source) {
-		try {
-			Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
-			// Parent root = loader.load();
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("../view/style.css").toExternalForm());
-			Stage primaryStage = new Stage();
-			primaryStage.setScene(scene);
-			primaryStage.setResizable(false);
-			primaryStage.setTitle("Big Store");
-			primaryStage.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+  private void loadPage(String source) throws MalformedURLException {
+    URL url1 = new File("src\\tos\\gui\\view\\newstyle.css").toURL();
+    try {
+      Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
+      // Parent root = loader.load();
+      Scene scene = new Scene(root);
+      scene.getStylesheets().add(url1.toExternalForm());
+      Stage primaryStage = new Stage();
+      primaryStage.setScene(scene);
+      primaryStage.setResizable(false);
+      primaryStage.setTitle("Big Store");
+      primaryStage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
 /*	@FXML
 	public void registerPage(ActionEvent event) {
 		loadPage("../view/Register.fxml");
 		closeLogin();
 	}*/
-	
-	
-	
+
+
 }

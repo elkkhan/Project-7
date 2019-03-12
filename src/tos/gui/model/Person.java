@@ -4,61 +4,62 @@ import java.util.Date;
 
 public abstract class Person {
 
-    private String name, surname, email, id;
-    private Date age;
-    private byte[] salt;
+  private String name, surname, email, id;
+  private Date age;
+  private byte[] salt;
 
-    Person(String name, String surname, String id, Date age, String email, byte[] salt) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-    }
 
-    public String getName() {
-        return name;
-    }
+  Person(String name, String surname, String id, Date age, String email, byte[] salt) {
+    this.name = name;
+    this.surname = surname;
+    this.age = age;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getSurname() {
-        return surname;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+  public String getSurname() {
+    return surname;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public String getId() {
-        return id;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public Date getAge() {
-        return age;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public void setAge(Date age) {
-        this.age = age;
-    }
+  public Date getAge() {
+    return age;
+  }
 
-    public byte[] getSalt() {
-        return salt;
-    }
+  public void setAge(Date age) {
+    this.age = age;
+  }
 
-    public void setSalt(byte[] salt) {
-        this.salt = salt;
-    }
+  public byte[] getSalt() {
+    return salt;
+  }
+
+  public void setSalt(byte[] salt) {
+    this.salt = salt;
+  }
 }

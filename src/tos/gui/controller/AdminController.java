@@ -1,17 +1,16 @@
 package tos.gui.controller;
 
 
-import javafx.fxml.Initializable;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 
 
 public class AdminController implements Initializable {
 
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
 
-	}
+  }
 }
