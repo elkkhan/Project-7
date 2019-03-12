@@ -8,6 +8,7 @@ public abstract class Person {
     private Date age;
     private byte[] salt;
 
+
     Person(String name, String surname, String id, Date age, String email, byte[] salt) {
         this.name = name;
         this.surname = surname;
