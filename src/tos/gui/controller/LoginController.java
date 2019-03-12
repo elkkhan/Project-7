@@ -86,7 +86,7 @@ public class LoginController implements Initializable {
 	}*/
 
 	private void loadPage(String source) throws MalformedURLException {
-		URL url1 = new File("src\\tos\\gui\\view\\style.css").toURL();
+		URL url1 = new File("src\\tos\\gui\\view\\newstyle.css").toURL();
 		try {
 			Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
 			// Parent root = loader.load();
