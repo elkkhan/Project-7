@@ -1,14 +1,9 @@
-// TODO: 2019-03-09 think of if to return a list of recipes or not, because in @hits there are multiple recipes
 package tos.common.api.parser;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
@@ -30,12 +25,17 @@ public class ApiRecipeParser {
   private static final String TOTAL_WEIGHT     = "totalWeight";
   //@formatter:on
 
+  /**
+   * Private empty constructor so that the class can't be instantiated. parse() is a static
+   */
+  private ApiRecipeParser() {
+  }
 
   /**
-   * Parses a JSON String literal into a {@link Recipe} object
+   * Parses a JSON response from the API into {@link Recipe} objects
    *
    * @param jsonString JSON string to parse
-   * @return Parsed Recipe object
+   * @return Parsed {@link Recipe} object
    */
   @NotNull
   public static List<Recipe> parse(@NotNull final String jsonString) {
@@ -53,6 +53,12 @@ public class ApiRecipeParser {
     return parsedRecipes;
   }
 
+  /**
+   * Parses a single JSON recipe object into a {@link Recipe} object
+   *
+   * @param jsonRecipe a JSON "recipe" object found in JSON "hits" array
+   * @return a parsed {@link Recipe} object
+   */
   @NotNull
   private static Recipe parseRecipe(@NotNull final JsonObject jsonRecipe) {
     Recipe.Builder recipeBuilder = Recipe.builder()
@@ -60,6 +66,8 @@ public class ApiRecipeParser {
         .setLabel(jsonRecipe.get(LABEL).getAsString())
         .setImageUrl(jsonRecipe.get(IMAGE_URL).getAsString())
         .setYield(jsonRecipe.get(YIELD).getAsDouble())
+        .setCalories(jsonRecipe.get(CALORIES).getAsDouble())
+        .setTotalWeight(jsonRecipe.get(TOTAL_WEIGHT).getAsDouble())
         .setHealthLabels(
             ApiHealthLabelParser.parse(
                 jsonRecipe.getAsJsonArray(HEALTH_LABELS)))
@@ -68,21 +76,7 @@ public class ApiRecipeParser {
                 jsonRecipe.getAsJsonArray(DIET_LABELS)))
         .setIndredients(
             ApiIngredientParser.parse(
-                jsonRecipe.getAsJsonArray(INGREDIENTS)))
-        .setCalories(jsonRecipe.get(CALORIES).getAsDouble())
-        .setTotalWeight(jsonRecipe.get(TOTAL_WEIGHT).getAsDouble());
+                jsonRecipe.getAsJsonArray(INGREDIENTS)));
     return recipeBuilder.build();
-  }
-
-
-  public static void main(String[] args) throws Exception {
-    Charset utf8 = StandardCharsets.UTF_8;
-    String json = new String(Files.readAllBytes(Paths.get("json/sample_query.json")), utf8);
-    Recipe recipe = ApiRecipeParser.parse(json).get(0);
-    System.out.println(recipe);
-
-    //HEALTH RETURNS NULL
-    //Labels in docs are wrong, check against api-param with tolower()
-    //
   }
 }

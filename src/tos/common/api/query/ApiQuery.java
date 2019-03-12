@@ -250,21 +250,21 @@ public class ApiQuery {
      */
     public ApiQuery build() throws QueryBuilderException {
       try {
-        URIBuilder builder = new URIBuilder(ApiClient.getBasePath());
-        builder.addParameter("q", this.apiQuery.QUERY);
-        builder.addParameter("app_id", this.apiQuery.APP_ID);
-        builder.addParameter("app_key", this.apiQuery.APP_KEY);
+        URIBuilder uriBuilder = new URIBuilder(ApiClient.getBasePath());
+        uriBuilder.addParameter("q", this.apiQuery.QUERY);
+        uriBuilder.addParameter("app_id", this.apiQuery.APP_ID);
+        uriBuilder.addParameter("app_key", this.apiQuery.APP_KEY);
         MultiMap<String, String> parameterValueMapping = this.apiQuery.mapParameters();
         for (String parameterName : parameterValueMapping.keySet()) {
           Collection parameterValues = (Collection) parameterValueMapping.get(parameterName);
           for (Object parameterValue : parameterValues) {
             String _parameterValue = (String) parameterValue;
             if (parameterValue != null) {
-              builder.addParameter(parameterName, _parameterValue);
+              uriBuilder.addParameter(parameterName, _parameterValue);
             }
           }
         }
-        this.apiQuery.encodedQuery = builder.build().toString();
+        this.apiQuery.encodedQuery = uriBuilder.build().toString();
       } catch (URISyntaxException e) {
         throw new QueryBuilderException(e.getMessage());
       }

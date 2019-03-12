@@ -42,15 +42,28 @@ public enum Diet {
     this.definition = definition;
   }
 
+  /**
+   * Returns a {@link Diet} enum matching the given label
+   *
+   * @param label label string to match against
+   * @return matching enum object
+   */
   public static Diet getByLabel(String label) {
     for (Diet diet : ALL_VALUES) {
-      if (diet.label.equals(label)) {
+      if (diet.label.equals(label)
+          || diet.apiParameter.equalsIgnoreCase(label)) {
         return diet;
       }
     }
     return null;
   }
 
+  /**
+   * Returns a {@link Diet} enum matching the given api parameter
+   *
+   * @param apiParameter api parameter string to match against
+   * @return matching enum object
+   */
   public static Diet getByApiParameter(String apiParameter) {
     for (Diet diet : ALL_VALUES) {
       if (diet.apiParameter.equals(apiParameter)) {
@@ -60,14 +73,30 @@ public enum Diet {
     return null;
   }
 
+
+  /**
+   * Gets api parameter.
+   *
+   * @return the api parameter
+   */
   public String getApiParameter() {
     return apiParameter;
   }
 
+  /**
+   * Gets label.
+   *
+   * @return the label
+   */
   public String getLabel() {
     return label;
   }
 
+  /**
+   * Gets definition.
+   *
+   * @return the definition
+   */
   public String getDefinition() {
     return definition;
   }

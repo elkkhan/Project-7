@@ -1,13 +1,15 @@
-/* TODO: 2019-02-26
- *   Parse the GET response into a Recipe object.
- *   Additional object like Ingredient and NutrientInfo also need to be parsed
- *   Take care of the case when the GET request returns null
+/* TODO: 2019-03-10
  *   Test everything
+ *   Document everything
  * */
 package tos.common.api.client;
 
+import java.util.List;
 import tos.common.api.connection.ConnectionManager;
+import tos.common.api.connection.ConnectionResponse;
+import tos.common.api.entities.Recipe;
 import tos.common.api.exceptions.ConnectionException;
+import tos.common.api.parser.ApiRecipeParser;
 import tos.common.api.query.ApiQuery;
 import tos.common.api.query.ApiQuery.Builder;
 
@@ -35,17 +37,18 @@ public class ApiClient {
     return new Builder(APPLICATION_ID, APPLICATION_KEYS, searchQuery);
   }
 
-  @Deprecated
-//this is just for testing, actual executeQuery should parse the response into a Recipe object
-  public String executeQuery(ApiQuery query) throws ConnectionException {
-    return connectionManager.executeGetRequest(query.toString()).getResponseContent();
-  }
-
-  /*public Recipe executeQuery(ApiQuery query) throws ConnectionException {
+  /**
+   * Executes the given {@link ApiQuery} query against the API Parses the received JSON response
+   * into a {@link Recipe} object and returns it
+   *
+   * @param query {@link ApiQuery} to execute
+   * @return parsed {@link Recipe} object
+   * @throws ConnectionException if the connection to the API was not successful
+   */
+  public List<Recipe> executeQuery(ApiQuery query) throws ConnectionException {
     String queryString = query.toString();
     ConnectionResponse connectionResponse = connectionManager.executeGetRequest(queryString);
     String queryResponse = connectionResponse.getResponseContent();
-    Recipe recipe = ApiRecipeParser.parse(queryResponse);
-    return recipe;
-  }*/
+    return ApiRecipeParser.parse(queryResponse);
+  }
 }
