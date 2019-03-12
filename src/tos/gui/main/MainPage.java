@@ -1,48 +1,47 @@
 package tos.gui.main;
 
 import java.io.File;
-import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.TimeZone;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import tos.common.api.entities.Recipe;
 
-public class MainPage extends Application{
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-        URL url1 = new File("src\\tos\\gui\\view\\MainPage.fxml").toURL();
-        URL url2 = new File("src\\tos\\gui\\view\\newstyle.css").toURL();
-		try {
+public class MainPage extends Application {
 
-            TimeZone.setDefault(TimeZone.getTimeZone("Europe/Budapest"));
+  public static void main(String[] args) {
+    launch(args);
+  }
 
-            AnchorPane root = (AnchorPane) FXMLLoader.load(url1);
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(url2.toExternalForm());
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(true);
-            primaryStage.setTitle("Receip");
-            primaryStage.show();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-	}
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+    // TODO Auto-generated method stub
 
+    try {
+      URL mainFxml = getResourcePath("src", "tos", "gui", "view", "MainPage.fxml");
+      URL mainCss = getResourcePath("src", "tos", "gui", "view", "newstyle.css");
+      TimeZone.setDefault(TimeZone.getTimeZone("Europe/Budapest"));
+      AnchorPane root = FXMLLoader.load(mainFxml);
+      Scene scene = new Scene(root);
+      scene.getStylesheets().add(mainCss.toExternalForm());
+      primaryStage.setScene(scene);
+      primaryStage.setResizable(true);
+      primaryStage.setTitle("Recipe");
+      primaryStage.show();
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+  }
 
-	 public static void main(String[] args) {
-	        launch(args);
-	        
-	    }
+  private URL getResourcePath(String... path) throws MalformedURLException {
+    File file = new File(path[0]);
 
-
-	
-	
+    for (int i = 1; i < path.length; i++) {
+      file = new File(file, path[i]);
+    }
+    return file.toURI().toURL();
+  }
 }
