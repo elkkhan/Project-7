@@ -11,7 +11,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="467.0" prefWidth="538.0" styleClass="mainPane" stylesheets="@newstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="467.0" prefWidth="538.0"   styleClass="mainPane" stylesheets="@newstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="register" layoutX="152.0" layoutY="168.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="109.0" text="Log in" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
