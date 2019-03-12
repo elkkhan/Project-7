@@ -32,7 +32,6 @@ public class MainPageController implements Initializable {
         URL url1 = new File("src\\tos\\gui\\view\\newstyle.css").toURL();
         try {
             Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
-            // Parent root = loader.load();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(url1.toExternalForm());
             Stage primaryStage = new Stage();
