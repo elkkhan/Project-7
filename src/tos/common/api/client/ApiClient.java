@@ -14,7 +14,7 @@ import tos.common.api.query.ApiQuery;
 import tos.common.api.query.ApiQuery.Builder;
 
 public class ApiClient {
-
+  
   private static final String BASE_PATH = "https://api.edamam.com/search?";
   private static final String APPLICATION_ID = "a975f036";
   private static final String APPLICATION_KEYS = "ec3265c79b41917d82e0379765cdb5ca";
