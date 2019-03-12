@@ -1,6 +1,7 @@
 package tos.gui.controller;
 
-import java.io.File;
+import static tos.gui.main.MainPage.getResourcePath;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,63 +16,54 @@ import javafx.stage.Stage;
 
 public class MainPageController implements Initializable {
 
-    @FXML
-    private Button register;
-    @FXML
-    private Button enter;
-    @FXML
-    private Button login;
+  @FXML
+  private Button register;
+  @FXML
+  private Button enter;
+  @FXML
+  private Button login;
 
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+
+  }
+
+  private void loadPage(URL source) throws MalformedURLException {
+    URL maincss = getResourcePath("src", "tos", "gui", "view", "newstyle.css");
+    try {
+      Pane root = FXMLLoader.load(source);
+      Scene scene = new Scene(root);
+      scene.getStylesheets().add(maincss.toExternalForm());
+      Stage primaryStage = new Stage();
+      primaryStage.setScene(scene);
+      primaryStage.setResizable(false);
+      primaryStage.setTitle("Big Store");
+      primaryStage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 
-    private URL getResourcePath(String... path) throws MalformedURLException {
-        File file = new File(path[0]);
+  @FXML
+  public void login_action(ActionEvent event) throws Exception {
+    URL maincss = getResourcePath("src", "tos", "gui", "view", "Login.fxml");
+    System.out.println(maincss.toExternalForm());
+    //loadPage(maincss.toExternalForm());
+  }
 
-        for (int i = 1; i < path.length; i++) {
-            file = new File(file, path[i]);
-        }
-        return file.toURI().toURL();
-    }
+  @FXML
+  public void register_action(ActionEvent event) throws Exception {
+    URL maincss = getResourcePath("src", "tos", "gui", "view", "Register.fxml");
+    loadPage(maincss);
 
-    private void loadPage(String source) throws MalformedURLException {
-        URL maincss = getResourcePath("src", "tos", "gui", "view", "newstyle.css");
-        try {
-            Pane root = FXMLLoader.load(getClass().getResource(source));
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(maincss.toExternalForm());
-            Stage primaryStage = new Stage();
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
-            primaryStage.setTitle("Big Store");
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+  }
 
-    @FXML
-    public void login_action(ActionEvent event) throws Exception {
-        URL maincss = getResourcePath("src", "tos", "gui", "view", "Login.fxml");
-        System.out.println(maincss.toExternalForm());
-        //loadPage(maincss.toExternalForm());
-    }
-
-    @FXML
-    public void register_action(ActionEvent event) throws Exception {
-        URL maincss = getResourcePath("src", "tos", "gui", "view", "Register.fxml");
-        loadPage(maincss.toExternalForm());
-
-    }
-
-    @FXML
-    public void enter_action(ActionEvent event) throws Exception {
-        URL maincss = getResourcePath("src", "tos", "gui", "view", "Login.fxml");
-        loadPage(maincss.toExternalForm());
-    }
+  @FXML
+  public void enter_action(ActionEvent event) throws Exception {
+    URL maincss = getResourcePath("src", "tos", "gui", "view", "Login.fxml");
+    loadPage(maincss);
+  }
 
 
 }

@@ -36,7 +36,7 @@ public class MainPage extends Application {
     }
   }
 
-  private URL getResourcePath(String... path) throws MalformedURLException {
+  public static URL getResourcePath(String... path) throws MalformedURLException {
     File file = new File(path[0]);
 
     for (int i = 1; i < path.length; i++) {
