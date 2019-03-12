@@ -125,6 +125,12 @@ public enum Health {
     this.definition = definition;
   }
 
+  /**
+   * Returns a {@link Health} enum matching the given label
+   *
+   * @param label label string to match against
+   * @return matching enum object
+   */
   public static Health getByLabel(String label) {
     for (Health health : ALL_VALUES) {
       if (health.label.equals(label)
@@ -135,6 +141,12 @@ public enum Health {
     return null;
   }
 
+  /**
+   * Returns a {@link Health} enum matching the given api parameter
+   *
+   * @param apiParameter api parameter string to match against
+   * @return matching enum object
+   */
   public static Health getByApiParameter(String apiParameter) {
     for (Health health : ALL_VALUES) {
       if (health.apiParameter.equals(apiParameter)) {
@@ -144,14 +156,29 @@ public enum Health {
     return null;
   }
 
+  /**
+   * Gets api parameter.
+   *
+   * @return the api parameter
+   */
   public String getApiParameter() {
     return apiParameter;
   }
 
+  /**
+   * Gets label.
+   *
+   * @return the label
+   */
   public String getLabel() {
     return label;
   }
 
+  /**
+   * Gets definition.
+   *
+   * @return the definition
+   */
   public String getDefinition() {
     return definition;
   }
