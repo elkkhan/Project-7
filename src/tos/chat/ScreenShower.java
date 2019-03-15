@@ -25,5 +25,15 @@ public class ScreenShower {
 
         }
     }
+    public static int readInt() {
+        while(true) {
+            try {
+                int i = Integer.parseInt(readString());
+                return i;
+            } catch (NumberFormatException e) {
+                writeMessage("Произошла ошибка при попытке ввода числа. Попробуйте еще раз.");
+            }
+        }
+    }
 
 }

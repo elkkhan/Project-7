@@ -22,7 +22,7 @@ public class Client {
                 Socket socket = null;
                 socket = new Socket(getServerAddress(),getServerPort());
                 connection = new Connection(socket);
-                clientHandshake();
+                clientCon();
                 clientLoop();
             } catch (IOException | ClassNotFoundException e) {
 
@@ -38,14 +38,13 @@ public class Client {
         protected void informAboutAddingNewUser(String userName){
             ScreenShower.writeMessage(userName + " has joined the chat.");
         }
-
         protected void notifyConnectionStatusChanged(boolean clientConnected){
             synchronized (Client.this){
                 Client.this.clientConnected=clientConnected;
                 Client.this.notify();
             }
         }
-        protected void clientHandshake() throws IOException, ClassNotFoundException{
+        protected void clientCon() throws IOException{
             Message m=null;
 
             while (!clientConnected) {
@@ -92,12 +91,15 @@ public class Client {
 
 
     protected String getServerAddress(){
-        System.out.print("Input an IP(e.g. localhost): ");
+        System.out.print("Input an IP: ");
         String ipAddress= ScreenShower.readString();
         return ipAddress;
     }
     protected int getServerPort(){
-        return 2020;
+        System.out.print("Input a server port: ");
+        int serverPort= ScreenShower.readInt();
+        return serverPort;
+        //return 2020;
     }
 
     protected String getUserName(){
@@ -105,7 +107,6 @@ public class Client {
         String username= ScreenShower.readString();
         return username;
     }
-
 
     protected SocketThread getSocketThread(){
         SocketThread newThread = new SocketThread();
@@ -127,6 +128,29 @@ public class Client {
             System.out.println("Thread was interrupted");
             System.exit(1);
         }
+
+        if(clientConnected){
+            System.out.println("Connected");
+            while(clientConnected){
+                String usermessege = ScreenShower.readString();
+                sendTextMessage(usermessege);
+
+            }
+        }
+        else{
+            System.out.println("Some error occured");
+
+        }
     }
 
+    protected void sendTextMessage(String text){
+        try {
+            connection.send(new Message(MessageType.TEXT, text));
+
+        }
+        catch (IOException e){
+            System.out.println("Can not be sent");
+            clientConnected=false;
+        }
+    }
 }
