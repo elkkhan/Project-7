@@ -258,9 +258,8 @@ public class ApiQuery {
         for (String parameterName : parameterValueMapping.keySet()) {
           Collection parameterValues = (Collection) parameterValueMapping.get(parameterName);
           for (Object parameterValue : parameterValues) {
-            String _parameterValue = (String) parameterValue;
             if (parameterValue != null) {
-              uriBuilder.addParameter(parameterName, _parameterValue);
+              uriBuilder.addParameter(parameterName, (String) parameterValue);
             }
           }
         }

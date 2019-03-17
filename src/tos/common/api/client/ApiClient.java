@@ -31,10 +31,10 @@ public class ApiClient {
    * Initializes a {@link Builder} with app_id, app_keys and search query for "q" parameter
    *
    * @param searchQuery Search text, value for "q" parameter
-   * @return a constructed {@link Builder}
+   * @return a constructed {@link ApiQuery.Builder}
    */
-  public Builder createQuery(String searchQuery) {
-    return new Builder(APPLICATION_ID, APPLICATION_KEYS, searchQuery);
+  public ApiQuery.Builder createQuery(String searchQuery) {
+    return new ApiQuery.Builder(APPLICATION_ID, APPLICATION_KEYS, searchQuery);
   }
 
   /**
