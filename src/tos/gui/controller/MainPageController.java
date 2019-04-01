@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import tos.common.util.GuiUtils;
 
 public class MainPageController implements Initializable {
 
@@ -25,22 +26,21 @@ public class MainPageController implements Initializable {
 
   @FXML
   public void login_action(ActionEvent event) throws Exception {
-    URL url1 = new File("src\\tos\\gui\\view\\Login.fxml").toURL();
-    System.out.println(url1.toExternalForm());
-    loadPage(url1.toExternalForm());
+    URL fxml = GuiUtils.getResource(getClass(), "Login.fxml");
+    GuiUtils.openWindow(fxml, null, "Login");
   }
 
   @FXML
   public void register_action(ActionEvent event) throws Exception {
     URL url1 = new File("src\\tos\\gui\\view\\Register.fxml").toURL();
-    loadPage(url1.toExternalForm());
+    //loadPage(url1.toExternalForm());
 
   }
 
   @FXML
   public void enter_action(ActionEvent event) throws Exception {
     URL url1 = new File("src\\tos\\gui\\view\\Login.fxml").toURL();
-    loadPage(url1.toExternalForm());
+    //loadPage(url1.toExternalForm());
   }
 
 

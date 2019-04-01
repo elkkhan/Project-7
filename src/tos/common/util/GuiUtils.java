@@ -24,7 +24,7 @@ public class GuiUtils {
 
   public static URL getResource(Class classInstance, String resourceName) {
     ClassLoader classLoader = classInstance.getClassLoader();
-    return classLoader.getResource("resources/" + resourceName);
+    return classLoader.getResource(resourceName);
   }
 
   public static void closeWindow(Stage stage) {

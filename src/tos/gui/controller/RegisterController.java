@@ -42,7 +42,7 @@ public class RegisterController implements Initializable {
 
     if (name.getText().matches("\\d*") || surname.getText().matches("\\d*") || id.getText()
         .equals("") || email.getText().equals("")) {
-      showMessage("Error", "You have empty fields.");
+      //showMessage("Error", "You have empty fields.");
     } else {
 
       System.out.println("THIS PART WILL ADD USERS INTO DATABASE.");
