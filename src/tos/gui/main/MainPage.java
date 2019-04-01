@@ -9,37 +9,34 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class MainPage extends Application{
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-        URL url1 = new File("src\\tos\\gui\\view\\MainPage.fxml").toURL();
-        URL url2 = new File("src\\tos\\gui\\view\\newstyle.css").toURL();
-		try {
+public class MainPage extends Application {
 
-            TimeZone.setDefault(TimeZone.getTimeZone("Europe/Budapest"));
+  public static void main(String[] args) {
+    launch(args);
+
+  }
+
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+    // TODO Auto-generated method stub
+    URL url1 = new File("src\\tos\\gui\\view\\MainPage.fxml").toURL();
+    URL url2 = new File("src\\tos\\gui\\view\\newstyle.css").toURL();
+    try {
+
+      TimeZone.setDefault(TimeZone.getTimeZone("Europe/Budapest"));
 
       AnchorPane root = FXMLLoader.load(url1);
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(url2.toExternalForm());
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(true);
-            primaryStage.setTitle("Receip");
-            primaryStage.show();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-	}
+      Scene scene = new Scene(root);
+      scene.getStylesheets().add(url2.toExternalForm());
+      primaryStage.setScene(scene);
+      primaryStage.setResizable(true);
+      primaryStage.setTitle("Receip");
+      primaryStage.show();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
 
-	 public static void main(String[] args) {
-	        launch(args);
-	        
-	    }
-
-
-	
-	
 }
