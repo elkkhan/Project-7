@@ -4,13 +4,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
-
-
-import tos.common.*;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import tos.gui.model.PasswordPair;
 import tos.gui.model.Users;
 

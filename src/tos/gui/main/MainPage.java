@@ -1,16 +1,13 @@
 package tos.gui.main;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.TimeZone;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import tos.common.api.entities.Recipe;
 
 public class MainPage extends Application{
 	
@@ -23,7 +20,7 @@ public class MainPage extends Application{
 
             TimeZone.setDefault(TimeZone.getTimeZone("Europe/Budapest"));
 
-            AnchorPane root = (AnchorPane) FXMLLoader.load(url1);
+      AnchorPane root = FXMLLoader.load(url1);
             Scene scene = new Scene(root);
             scene.getStylesheets().add(url2.toExternalForm());
             primaryStage.setScene(scene);
