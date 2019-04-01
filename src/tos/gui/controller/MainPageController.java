@@ -1,6 +1,5 @@
 package tos.gui.controller;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -32,15 +31,20 @@ public class MainPageController implements Initializable {
 
   @FXML
   public void register_action(ActionEvent event) throws Exception {
-    URL url1 = new File("src\\tos\\gui\\view\\Register.fxml").toURL();
-    //loadPage(url1.toExternalForm());
+    URL fxml = GuiUtils.getResource(getClass(), "Register.fxml");
+    GuiUtils.openWindow(fxml, null, "Register");
 
   }
 
   @FXML
   public void enter_action(ActionEvent event) throws Exception {
-    URL url1 = new File("src\\tos\\gui\\view\\Login.fxml").toURL();
-    //loadPage(url1.toExternalForm());
+    //1. create URL for fxml
+    //URL fxml = GuiUtils.getResource(getClass(),"FXMLNAME.FXML);
+    // }
+    //2.Open the window
+    //GuiUtils.openWindow(fxml, null(if css is null or set in FXML),"TITLE");
+    //chalishmasa yaz bana shimdi chikmam lazim
+    //tamam cok sagol bishey degil
   }
 
 
