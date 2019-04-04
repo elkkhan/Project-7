@@ -101,13 +101,25 @@ public class Client {
         return serverPort;
         //return 2020;
     }
+    
 
     protected String getUserName(){
         System.out.print("Input your name: ");
         String username= ScreenShower.readString();
+        while(!isFirstCapital(username)){
+            System.out.print("Your name has to start from a capital letter! ");
+            username= ScreenShower.readString();
+        }
         return username;
     }
-
+    public boolean isFirstCapital(String str){
+        char ch = str.charAt(0);
+        String letter = Character.toString(ch);
+        if(letter.equals(letter.toUpperCase())){
+            return true;
+        }
+        return false;
+    }
     protected SocketThread getSocketThread(){
         SocketThread newThread = new SocketThread();
 
