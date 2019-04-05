@@ -93,7 +93,35 @@ public class Client {
     protected String getServerAddress(){
         System.out.print("Input an IP: ");
         String ipAddress= ScreenShower.readString();
+        while(!isValidIP(ipAddress)){
+            System.out.print("Your ip has to consist from 4 digital numbers e.g.(192.168.0.3)! ");
+            ipAddress= ScreenShower.readString();
+        }
         return ipAddress;
+    }
+    public boolean isValidIP(String ip){
+        String[] parts = ip.split("\\.");
+
+        if(ip.equals("localhost")) {
+            return true;
+        }
+
+       else if(parts.length==4){
+            int flag = 0;
+            for(int i=0;i<4;i++){
+                if(parts[i].length()>0 && parts[i].length()<4){
+                    flag++;
+                }
+            }
+            System.out.println(flag);
+            if(flag==4) return true;
+            else return false;
+        }
+
+        else {
+            return false;
+        }
+
     }
     protected int getServerPort(){
         System.out.print("Input a server port: ");
@@ -101,7 +129,7 @@ public class Client {
         return serverPort;
         //return 2020;
     }
-    
+
 
     protected String getUserName(){
         System.out.print("Input your name: ");

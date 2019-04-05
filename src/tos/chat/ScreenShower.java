@@ -26,14 +26,27 @@ public class ScreenShower {
         }
     }
     public static int readInt() {
-        while(true) {
-            try {
-                int i = Integer.parseInt(readString());
-                return i;
-            } catch (NumberFormatException e) {
-                writeMessage("Произошла ошибка при попытке ввода числа. Попробуйте еще раз.");
+       String num = readString();
+       while(!isAllDigits(num)){
+           writeMessage("All characters must be digits! Try once more:");
+           num = readString();
+       }
+       int number = Integer.parseInt(num);
+       return number;
+    }
+
+    public static boolean isAllDigits(String str)
+    {
+        int size = str.length();
+
+        if(str==null) return false;
+
+        for(int i=0;i<size;i++){
+            if(!Character.isDigit(str.charAt(i))){
+                return false;
             }
         }
+        return true;
     }
 
 }
