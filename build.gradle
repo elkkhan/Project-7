@@ -35,7 +35,6 @@ test {
 sourceSets {
     main.java.srcDirs = ['src']
     test.java.srcDirs  = ['tests']
-    main.resources.srcDirs = ['src/tos/gui/view']
 }
 
 
