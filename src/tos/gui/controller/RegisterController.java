@@ -30,12 +30,32 @@ public class RegisterController implements Initializable {
   @FXML
   private TextField email;
 
+  String nameT;
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
 
   }
+  public boolean isCorrectForRegister(String nameT,String surnameT,String idT ,String emailT,String passwordT )
+  {
+    /*
+   if(nameT==null||surnameT==null){return false;}
+   int len = nameT.length();
+   for(int i=0; i < len; i++)
+   {
+     if((Character.isLetter(nameT.charAt(i))==false) || Character.isLetter(surnameT.charAt(i))==false){
+       return false;
+     }
+   }
+   return true;
+   */
+    if (nameT.equals("\\d+") || nameT.length()<2 ||surnameT.length()<2|| surnameT.equals("\\d+") || passwordT.length()<5 || emailT.length()< 5 ) {
+      return false;
+    } else {
+      return true;
+    }
 
+  }
   // Event Listener on Button.onAction
   @FXML  // I will fix this register.
   public void register(ActionEvent event) throws NoSuchAlgorithmException, InvalidKeySpecException {

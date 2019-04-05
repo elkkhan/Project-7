@@ -77,23 +77,6 @@ public class LoginController implements Initializable {
 		((Stage)id.getScene().getWindow()).close();
 	}*/
 
-  private void loadPage(String source) throws MalformedURLException {
-    URL url1 = new File("src\\tos\\gui\\view\\newstyle.css").toURL();
-    try {
-      Pane root = (Pane) FXMLLoader.load(getClass().getResource(source));
-      // Parent root = loader.load();
-      Scene scene = new Scene(root);
-      scene.getStylesheets().add(url1.toExternalForm());
-      Stage primaryStage = new Stage();
-      primaryStage.setScene(scene);
-      primaryStage.setResizable(false);
-      primaryStage.setTitle("Big Store");
-      primaryStage.show();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
 /*	@FXML
 	public void registerPage(ActionEvent event) {
 		loadPage("../view/Register.fxml");
