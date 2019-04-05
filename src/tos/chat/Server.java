@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static tos.chat.MessageType.TEXT;
+
 public class Server {
 
     public static void main(String[] args){
@@ -57,6 +59,8 @@ public class Server {
             while (true) {
                 connection.send(new Message(MessageType.NAME_REQUEST));
                 Message answer = connection.receive();
+               // ScreenShower.writeMessage(String.valueOf(connection.receive()));
+                System.out.println(answer);
 
                 if (answer.getType() == MessageType.USER_NAME) {
 
@@ -82,19 +86,34 @@ public class Server {
         private void serverLoop(Connection connection, String userName) throws IOException, ClassNotFoundException{
             while(true){
                 Message message = connection.receive();
-                if(message.getType()==MessageType.TEXT){
+                /*if(message.getType()== TEXT){
                     String str = userName+": "+ message.getData();
-                    sendBroadcastMessage(new Message(MessageType.TEXT,str));
+                    System.out.println(userName + message.getType());
+                    sendBroadcastMessage(new Message(TEXT,str));
+                }
+
+                */
+                if(isTextType(message.getType())){
+                    String str = userName+": "+ message.getData();
+
+                    sendBroadcastMessage(new Message(TEXT,str));
                 }
                 else ScreenShower.writeMessage("Something wrong, can't send a message");
-
             }
 
         }
 
+
         public Handler(Socket socket){
             this.socket=socket;
         }
+    }
+    public static boolean isTextType(MessageType messageType){
+        if(messageType==TEXT){
+            return true;
+        }
+        else return false;
+
     }
 
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
@@ -103,6 +122,7 @@ public class Server {
         for(Connection connection : connectionMap.values()) {
             try {
                 connection.send(message);
+               // ScreenShower.writeMessage(message+" это моя проверка что значит message");
             } catch (IOException e) {
                 ScreenShower.writeMessage("Something wrong, can't send a message");
             }
