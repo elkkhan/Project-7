@@ -14,15 +14,13 @@ import javafx.scene.control.TextField;
 public class RegisterController implements Initializable {
 
 
+  String nameT;
   @FXML
   private TextField name;
-
   @FXML
   private TextField surname;
-
   @FXML
   private DatePicker datePicker;
-
   @FXML
   private PasswordField password;
   @FXML
@@ -30,14 +28,13 @@ public class RegisterController implements Initializable {
   @FXML
   private TextField email;
 
-  String nameT;
-
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
 
   }
-  public boolean isCorrectForRegister(String nameT,String surnameT,String idT ,String emailT,String passwordT )
-  {
+
+  public boolean isCorrectForRegister(String nameT, String surnameT, String idT, String emailT,
+      String passwordT) {
     /*
    if(nameT==null||surnameT==null){return false;}
    int len = nameT.length();
@@ -49,13 +46,15 @@ public class RegisterController implements Initializable {
    }
    return true;
    */
-    if (nameT.equals("\\d+") || nameT.length()<2 ||surnameT.length()<2|| surnameT.equals("\\d+") || passwordT.length()<5 || emailT.length()< 5 ) {
+    if (nameT.equals("\\d+") || nameT.length() < 2 || surnameT.length() < 2 || surnameT
+        .equals("\\d+") || passwordT.length() < 5 || emailT.length() < 5) {
       return false;
     } else {
       return true;
     }
 
   }
+
   // Event Listener on Button.onAction
   @FXML  // I will fix this register.
   public void register(ActionEvent event) throws NoSuchAlgorithmException, InvalidKeySpecException {

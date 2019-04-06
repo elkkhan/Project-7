@@ -35,6 +35,7 @@ public class MainPageController implements Initializable {
     GuiUtils.openWindow(fxml, null, "Register");
 
   }
+
   @FXML
   public void enter_action(ActionEvent event) throws Exception {
     //1. create URL for fxml
@@ -44,7 +45,6 @@ public class MainPageController implements Initializable {
     //GuiUtils.openWindow(fxml, null(if css is null or set in FXML),"TITLE");
 
   }
-
 
 
 }
