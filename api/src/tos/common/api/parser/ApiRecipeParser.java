@@ -3,11 +3,13 @@ package tos.common.api.parser;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import tos.common.api.entities.Recipe;
+import tos.common.api.exceptions.ParserException;
 
 public class ApiRecipeParser {
 
@@ -38,19 +40,23 @@ public class ApiRecipeParser {
    * @return Parsed {@link Recipe} object
    */
   @NotNull
-  public static List<Recipe> parse(@NotNull final String jsonString) {
-    JsonParser parser = new JsonParser();
-    JsonObject wholeJson = parser.parse(jsonString).getAsJsonObject();
-    JsonArray hits = wholeJson.getAsJsonArray(HITS_KEY);
-    List<JsonObject> jsonRecipes = new ArrayList<>();
-    for (JsonElement hit : hits) {
-      jsonRecipes.add(hit.getAsJsonObject().getAsJsonObject(RECIPE_KEY));
+  public static List<Recipe> parse(@NotNull final String jsonString) throws ParserException {
+    try {
+      JsonParser parser = new JsonParser();
+      JsonObject wholeJson = parser.parse(jsonString).getAsJsonObject();
+      JsonArray hits = wholeJson.getAsJsonArray(HITS_KEY);
+      List<JsonObject> jsonRecipes = new ArrayList<>();
+      for (JsonElement hit : hits) {
+        jsonRecipes.add(hit.getAsJsonObject().getAsJsonObject(RECIPE_KEY));
+      }
+      List<Recipe> parsedRecipes = new ArrayList<>();
+      for (JsonObject jsonRecipe : jsonRecipes) {
+        parsedRecipes.add(parseRecipe(jsonRecipe));
+      }
+      return parsedRecipes;
+    } catch (JsonParseException | IllegalStateException e) {
+      throw new ParserException(e.getMessage());
     }
-    List<Recipe> parsedRecipes = new ArrayList<>();
-    for (JsonObject jsonRecipe : jsonRecipes) {
-      parsedRecipes.add(parseRecipe(jsonRecipe));
-    }
-    return parsedRecipes;
   }
 
   /**

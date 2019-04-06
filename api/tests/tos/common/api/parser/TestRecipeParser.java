@@ -15,6 +15,7 @@ import tos.common.api.entities.Diet;
 import tos.common.api.entities.Health;
 import tos.common.api.entities.Ingredient;
 import tos.common.api.entities.Recipe;
+import tos.common.api.exceptions.ParserException;
 
 class TestRecipeParser {
 
@@ -22,12 +23,12 @@ class TestRecipeParser {
   private final Recipe SAMPLE_BACON;
 
 
-  TestRecipeParser() {
+  TestRecipeParser() throws ParserException {
     SAMPLE_CHICKEN = parseSingleRecipeFromSampleJson("sample_chicken_curry.json");
     SAMPLE_BACON = parseSingleRecipeFromSampleJson("sample_bacon.json");
   }
 
-  private Recipe parseSingleRecipeFromSampleJson(String jsonFileName) {
+  private Recipe parseSingleRecipeFromSampleJson(String jsonFileName) throws ParserException {
     try {
       Path jsonFilePath = new File(getClass().getClassLoader().getResource(jsonFileName).getPath())
           .toPath();

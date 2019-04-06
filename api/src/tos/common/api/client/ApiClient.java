@@ -10,6 +10,7 @@ import tos.common.api.connection.ConnectionManager;
 import tos.common.api.connection.ConnectionResponse;
 import tos.common.api.entities.Recipe;
 import tos.common.api.exceptions.ConnectionException;
+import tos.common.api.exceptions.ParserException;
 import tos.common.api.parser.ApiRecipeParser;
 import tos.common.api.query.ApiQuery;
 import tos.common.api.query.ApiQuery.Builder;
@@ -46,7 +47,8 @@ public class ApiClient {
    * @return parsed {@link Recipe} object
    * @throws ConnectionException if the connection to the API was not successful
    */
-  public List<Recipe> executeQuery(@NotNull final ApiQuery query) throws ConnectionException {
+  public List<Recipe> executeQuery(@NotNull final ApiQuery query)
+      throws ConnectionException, ParserException {
     String queryString = query.toString();
     ConnectionResponse connectionResponse = connectionManager.executeGetRequest(queryString);
     String queryResponse = connectionResponse.getResponseContent();

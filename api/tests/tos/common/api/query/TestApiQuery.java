@@ -9,7 +9,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.List;
-import org.apache.commons.codec.EncoderException;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -91,7 +90,7 @@ class TestApiQuery {
   }
 
   @Test
-  void testBuildQuery() throws QueryBuilderException, EncoderException, URISyntaxException {
+  void testBuildQuery() throws QueryBuilderException, URISyntaxException {
     ApiQuery query =
         builder.
             setFrom("5").

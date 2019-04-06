@@ -92,10 +92,10 @@ public class Recipe {
 
   public static class Builder {
 
+    private Recipe recipe = new Recipe();
+
     private Builder() {
     }
-
-    private Recipe recipe = new Recipe();
 
     public Builder setUri(String uri) {
       this.recipe.uri = uri;
