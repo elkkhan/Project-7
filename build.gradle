@@ -1,31 +1,47 @@
 plugins {
     id 'java'
     id 'idea'
+    id 'com.adarshr.test-logger' version '1.6.0' apply false
 }
+
 
 group 'tos'
 version '0.1'
-
-repositories {
-    flatDir {
-        dirs 'lib'
-    }
-    mavenCentral()
-}
 
 dependencies {
     compile(project("api"))
 }
 
-test {
-    useJUnitPlatform()
-    testLogging {
-        exceptionFormat = 'full'
+allprojects {
+    apply plugin: 'com.adarshr.test-logger'
+    repositories {
+        flatDir {
+            dirs 'lib'
+        }
+        mavenCentral()
+    }
+
+    testlogger {
+        showExceptions true
+        slowThreshold 500
+        showSummary true
+        showPassed true
+        showSkipped true
+        showFailed true
+        showStandardStreams true
+        showPassedStandardStreams true
+        showSkippedStandardStreams true
+        showFailedStandardStreams true
+    }
+
+    test {
+        useJUnitPlatform()
+        testLogging {
+            exceptionFormat = 'full'
+        }
     }
 }
 
 sourceSets {
     main.java.srcDirs = ['src']
 }
-
-

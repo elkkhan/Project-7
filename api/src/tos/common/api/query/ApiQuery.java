@@ -1,5 +1,3 @@
-// FIXME: 2019-03-03: FROM parameter should default to 0.
-
 package tos.common.api.query;
 
 import java.net.URISyntaxException;
@@ -22,7 +20,7 @@ public class ApiQuery {
   private final String APP_ID;
   private final String APP_KEY;
   //@formatter:off
-  private String FROM           = null;
+  private String FROM           = "0";
   private String TO             = null;
   private String INGR           = null;
   private String DIET           = null;
@@ -39,6 +37,54 @@ public class ApiQuery {
     this.QUERY = qSearch;
   }
 
+
+  public String getQUERY() {
+    return QUERY;
+  }
+
+  public String getAPP_ID() {
+    return APP_ID;
+  }
+
+  public String getAPP_KEY() {
+    return APP_KEY;
+  }
+
+  public String getFROM() {
+    return FROM;
+  }
+
+  public String getTO() {
+    return TO;
+  }
+
+  public String getINGR() {
+    return INGR;
+  }
+
+  public String getDIET() {
+    return DIET;
+  }
+
+  public String getCALORIES() {
+    return CALORIES;
+  }
+
+  public String getTIME() {
+    return TIME;
+  }
+
+  public String getEncodedQuery() {
+    return encodedQuery;
+  }
+
+  public List<String> getHEALTH() {
+    return HEALTH;
+  }
+
+  public List<String> getEXCLUDED() {
+    return EXCLUDED;
+  }
 
   private MultiMap<String, String> mapParameters() throws QueryBuilderException {
     validateQuery();
@@ -97,7 +143,7 @@ public class ApiQuery {
     int toValue;
     try {
       toValue = Integer.parseInt(TO);
-      if (toValue < Integer.parseInt(FROM)) {
+      if (toValue <= Integer.parseInt(FROM)) {
         return false;
       }
     } catch (NumberFormatException e) {
@@ -143,19 +189,19 @@ public class ApiQuery {
     if (caloriesOrTime == null) {
       return true;
     }
-    Pattern pattern1 = Pattern.compile("^\\d+$");//123
-    Pattern pattern2 = Pattern.compile("^\\d+\\+$");//123+
-    Pattern pattern3 = Pattern.compile("^\\d+-\\d+$");//123-456
+    Pattern pattern1 = Pattern.compile("^[1-9]\\d*$");//123
+    Pattern pattern2 = Pattern.compile("^[1-9]\\d*\\+$");//123+
+    Pattern pattern3 = Pattern.compile("^[1-9]\\d*-\\d*$");//123-456
     if (pattern1.matcher(caloriesOrTime).matches() || pattern2.matcher(caloriesOrTime)
         .matches()) {
       return true;
     }
     if (pattern3.matcher(caloriesOrTime).matches()) {
       int from = Integer.parseInt(caloriesOrTime.substring(0, caloriesOrTime.indexOf("-")));
-      int to = Integer.parseInt(caloriesOrTime.substring(caloriesOrTime.indexOf("-")));
+      int to = Integer.parseInt(caloriesOrTime.substring(caloriesOrTime.indexOf("-") + 1));
       return from <= to;
     }
-    return true;
+    return false;
   }
 
   private boolean validateFromOrIngr(String fromOrIngr) {
@@ -165,7 +211,7 @@ public class ApiQuery {
     int fromOrIngValue;
     try {
       fromOrIngValue = Integer.parseInt(fromOrIngr);
-      if (fromOrIngValue < 1) {
+      if (fromOrIngValue < 0) {
         return false;
       }
     } catch (NumberFormatException e) {
@@ -268,6 +314,10 @@ public class ApiQuery {
         throw new QueryBuilderException(e.getMessage());
       }
       return this.apiQuery;
+    }
+
+    public ApiQuery getApiQuery() {
+      return apiQuery;
     }
   }
 }

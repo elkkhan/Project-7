@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'idea'
 }
-
 group 'tos.common'
 version '1.0'
 
@@ -24,6 +23,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.5'
 }
 
+
 test {
     useJUnitPlatform()
     testLogging {
@@ -39,5 +39,5 @@ sourceSets {
 
 jar {
     archivesBaseName = 'tos.common.api'
-    version =  this.version
+    version = this.version
 }

@@ -40,7 +40,7 @@ class TestRecipeParser {
   }
 
   @Test
-  void testHealthLabelParsing() {
+  void testHealthLabelParsing_1() {
     List<Health> labels = Arrays
         .asList(SAMPLE_BACON.getHealthLabels());
     assertTrue(labels.contains(Health.sugar_conscious));
@@ -51,7 +51,28 @@ class TestRecipeParser {
   }
 
   @Test
-  void testDietLabelParsing() {
+  void testHealthLabelParsing_2() {
+    List<Health> labels = Arrays
+        .asList(SAMPLE_CHICKEN.getHealthLabels());
+
+    assertFalse(labels.contains(Health.sugar_conscious));
+    assertTrue(labels.contains(Health.peanut_free));
+    assertTrue(labels.contains(Health.tree_nut_free));
+    assertTrue(labels.contains(Health.alcohol_free));
+    assertFalse(labels.contains(Health.dairy_free));
+  }
+
+
+  @Test
+  void testDietLabelParsing_1() {
+    List<Diet> labels = Arrays
+        .asList(SAMPLE_BACON.getDietLabels());
+    assertTrue(labels.contains(Diet.low_carb));
+    assertFalse(labels.contains(Diet.high_fiber));
+  }
+
+  @Test
+  void testDietLabelParsing_2() {
     List<Diet> labels = Arrays
         .asList(SAMPLE_CHICKEN.getDietLabels());
     assertTrue(labels.contains(Diet.low_carb));
@@ -59,13 +80,23 @@ class TestRecipeParser {
   }
 
   @Test
-  void TestIngredientParsing() {
+  void TestIngredientParsing_1() {
     List<Ingredient> labels = Arrays
         .asList(SAMPLE_BACON.getIngredients());
     assertEquals(labels.get(0).getText(), "10 fresh whole chicken wings");
     assertEquals(labels.get(2).getWeight(), 1.62f);
     assertEquals(labels.get(1).getWeight(), 290f);
     assertEquals(labels.get(2).getText(), "Freshly ground black pepper");
+  }
+
+  @Test
+  void TestIngredientParsing_2() {
+    List<Ingredient> labels = Arrays
+        .asList(SAMPLE_CHICKEN.getIngredients());
+    assertEquals(labels.get(0).getText(), "3 pounds chicken pieces (thighs and breast), skinless");
+    assertEquals(labels.get(0).getWeight(), 1360.77711f);
+    assertEquals(labels.get(1).getWeight(), 14.0f);
+    assertEquals(labels.get(2).getText(), "3 medium onions, sliced");
   }
 
   @Test
