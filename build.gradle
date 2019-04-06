@@ -14,15 +14,8 @@ repositories {
 }
 
 dependencies {
-    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
-    testCompile 'org.junit.jupiter:junit-jupiter-params:5.4.0'
-    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
-    compile 'org.json:json:20180813'
-    compile 'org.apache.httpcomponents:httpclient:4.5.6'
-    compile 'org.apache.httpcomponents:httpcore:4.4.10'
-    compile 'org.jetbrains:annotations:16.0.2'
-    compile 'org.apache.commons:commons-collections4:4.0'
-    compile 'com.google.code.gson:gson:2.8.5'
+    compile(project("api"))
+    testCompile (project("api"))
 }
 
 test {
@@ -34,7 +27,9 @@ test {
 
 sourceSets {
     main.java.srcDirs = ['src']
-    test.java.srcDirs  = ['tests']
+    test.java.exclude('tests/tos/common/api')
+    //test.java.srcDirs = ['tests']
+    
 }
 
 

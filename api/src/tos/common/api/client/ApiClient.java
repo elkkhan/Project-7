@@ -5,6 +5,7 @@
 package tos.common.api.client;
 
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 import tos.common.api.connection.ConnectionManager;
 import tos.common.api.connection.ConnectionResponse;
 import tos.common.api.entities.Recipe;
@@ -33,7 +34,7 @@ public class ApiClient {
    * @param searchQuery Search text, value for "q" parameter
    * @return a constructed {@link ApiQuery.Builder}
    */
-  public ApiQuery.Builder createQuery(String searchQuery) {
+  public ApiQuery.Builder createQuery(final String searchQuery) {
     return new ApiQuery.Builder(APPLICATION_ID, APPLICATION_KEYS, searchQuery);
   }
 
@@ -45,7 +46,7 @@ public class ApiClient {
    * @return parsed {@link Recipe} object
    * @throws ConnectionException if the connection to the API was not successful
    */
-  public List<Recipe> executeQuery(ApiQuery query) throws ConnectionException {
+  public List<Recipe> executeQuery(@NotNull final ApiQuery query) throws ConnectionException {
     String queryString = query.toString();
     ConnectionResponse connectionResponse = connectionManager.executeGetRequest(queryString);
     String queryResponse = connectionResponse.getResponseContent();
