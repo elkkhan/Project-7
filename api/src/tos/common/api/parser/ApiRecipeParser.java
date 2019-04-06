@@ -74,7 +74,7 @@ public class ApiRecipeParser {
         .setDietLabels(
             ApiDietLabelParser.parse(
                 jsonRecipe.getAsJsonArray(DIET_LABELS)))
-        .setIndredients(
+        .setIngredients(
             ApiIngredientParser.parse(
                 jsonRecipe.getAsJsonArray(INGREDIENTS)));
     return recipeBuilder.build();

@@ -2,7 +2,4 @@
 .gradle/
 .idea/
 build/
-json/
 out/
-/api/build/
-/api/.gradle/

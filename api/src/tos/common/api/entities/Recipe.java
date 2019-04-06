@@ -132,8 +132,8 @@ public class Recipe {
       return this;
     }
 
-    public Builder setIndredients(Ingredient[] indredients) {
-      this.recipe.ingredients = indredients;
+    public Builder setIngredients(Ingredient[] ingredients) {
+      this.recipe.ingredients = ingredients;
       return this;
     }
 

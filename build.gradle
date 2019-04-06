@@ -15,7 +15,6 @@ repositories {
 
 dependencies {
     compile(project("api"))
-    testCompile (project("api"))
 }
 
 test {
@@ -27,9 +26,6 @@ test {
 
 sourceSets {
     main.java.srcDirs = ['src']
-    test.java.exclude('tests/tos/common/api')
-    //test.java.srcDirs = ['tests']
-    
 }
 
 
