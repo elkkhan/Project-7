@@ -11,23 +11,46 @@ import static tos.chat.MessageType.TEXT;
 
 public class Server {
 
-  public static void main(String[] args) {
-    // ConsoleHelper.writeMessage("Input server port: ");
+  public static void main(String[] args) throws IOException {
+    ServerSocket serverSocket=new ServerSocket();
+    ScreenShower.writeMessage("Please input server port: ");
+    String servport = ScreenShower.readString();
+    while(!isInteger(servport)){
+      System.out.println("Your port number should consist only digits!");
+      servport = ScreenShower.readString();
+    }
+    int port = Integer.valueOf(servport);
+    while(!isCorrectPort(port))
+    {
+      System.out.println("Your port number has to be in range from 1024 to 65535!");
+      port = ScreenShower.readInt();
+    }
+    serverSocket = new ServerSocket(port);
 
-        /*try (ServerSocket serverSocket = new ServerSocket(ConsoleHelper.readInt())) {
-            ConsoleHelper.writeMessage("Server started...");
-            while (true) {
-                new Handler(serverSocket.accept()).start();
-            }
-        }*/
-    try (ServerSocket serverSocket = new ServerSocket(2020)) {
-      ScreenShower.writeMessage("Server started...");
+
+      ScreenShower.writeMessage("Server " + port + " started...");
       while (true) {
         new Handler(serverSocket.accept()).start();
       }
-    } catch (Exception e) {
-      ScreenShower.writeMessage("Something wrong, Server socket closed.");
+
+  }
+public static boolean isInteger(String num){
+  int size = num.length();
+
+  if (num == null) {
+    return false;
+  }
+
+  for (int i = 0; i < size; i++) {
+    if (!Character.isDigit(num.charAt(i))) {
+      return false;
     }
+  }
+  return true;
+}
+  public static boolean isCorrectPort(int port){
+    if(port>1024 && port<65535) return true;
+    return false;
   }
 
   private static class Handler extends Thread {
