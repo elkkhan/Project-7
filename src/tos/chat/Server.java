@@ -1,62 +1,89 @@
 package tos.chat;
 
+import static tos.chat.MessageType.TEXT;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static tos.chat.MessageType.TEXT;
-
 public class Server {
 
+  private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
+
   public static void main(String[] args) throws IOException {
-    ServerSocket serverSocket=new ServerSocket();
+    ServerSocket serverSocket = new ServerSocket();
     ScreenShower.writeMessage("Please input server port: ");
     String servport = ScreenShower.readString();
-    while(!isInteger(servport)){
+    while (!isInteger(servport)) {
       System.out.println("Your port number should consist only digits!");
       servport = ScreenShower.readString();
     }
     int port = Integer.valueOf(servport);
-    while(!isCorrectPort(port))
-    {
+    while (!isCorrectPort(port)) {
       System.out.println("Your port number has to be in range from 1024 to 65535!");
       port = ScreenShower.readInt();
     }
     serverSocket = new ServerSocket(port);
 
-
-      ScreenShower.writeMessage("Server " + port + " started...");
-      while (true) {
-        new Handler(serverSocket.accept()).start();
-      }
+    ScreenShower.writeMessage("Server " + port + " started...");
+    while (true) {
+      new Handler(serverSocket.accept()).start();
+    }
 
   }
-public static boolean isInteger(String num){
-  int size = num.length();
 
-  if (num == null) {
-    return false;
-  }
+  public static boolean isInteger(String num) {
+    int size = num.length();
 
-  for (int i = 0; i < size; i++) {
-    if (!Character.isDigit(num.charAt(i))) {
+    if (num == null) {
       return false;
     }
+
+    for (int i = 0; i < size; i++) {
+      if (!Character.isDigit(num.charAt(i))) {
+        return false;
+      }
+    }
+    return true;
   }
-  return true;
-}
-  public static boolean isCorrectPort(int port){
-    if(port>1024 && port<65535) return true;
+
+  public static boolean isCorrectPort(int port) {
+    if (port > 1024 && port < 65535) {
+      return true;
+    }
     return false;
+  }
+
+  public static boolean isTextType(MessageType messageType) {
+    if (messageType == TEXT) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+  public static void sendBroadcastMessage(Message message) {
+    for (Connection connection : connectionMap.values()) {
+      try {
+        connection.send(message);
+        // ScreenShower.writeMessage(message+" это моя проверка что значит message");
+      } catch (IOException e) {
+        ScreenShower.writeMessage("Something wrong, can't send a message");
+      }
+    }
   }
 
   private static class Handler extends Thread {
 
     public Socket socket;
     String username;
+
+    public Handler(Socket socket) {
+      this.socket = socket;
+    }
 
     public void run() {
       ScreenShower.writeMessage("New Connection " + socket.getRemoteSocketAddress());
@@ -130,33 +157,6 @@ public static boolean isInteger(String num){
         }
       }
 
-    }
-
-
-    public Handler(Socket socket) {
-      this.socket = socket;
-    }
-  }
-
-  public static boolean isTextType(MessageType messageType) {
-    if (messageType == TEXT) {
-      return true;
-    } else {
-      return false;
-    }
-
-  }
-
-  private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
-
-  public static void sendBroadcastMessage(Message message) {
-    for (Connection connection : connectionMap.values()) {
-      try {
-        connection.send(message);
-        // ScreenShower.writeMessage(message+" это моя проверка что значит message");
-      } catch (IOException e) {
-        ScreenShower.writeMessage("Something wrong, can't send a message");
-      }
     }
   }
 
