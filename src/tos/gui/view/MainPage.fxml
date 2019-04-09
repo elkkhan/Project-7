@@ -6,20 +6,14 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="467.0" prefWidth="538.0" styleClass="mainPane" stylesheets="@newstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tos.gui.controller.MainPageController">
    <children>
       <Button layoutX="343.0" layoutY="14.0" mnemonicParsing="false" onAction="#login_action"
         prefHeight="31.0" prefWidth="87.0" text="Log in" fx:id="login"/>
-      <Button layoutY="461.0" mnemonicParsing="false" onAction="#register_action" prefHeight="31.0"
-        prefWidth="96.0" text="Register" fx:id="register"/>
+      <Button layoutX="238.0" layoutY="14.0" mnemonicParsing="false" onAction="#register_action"
+        prefHeight="31.0" prefWidth="96.0" text="Register" fx:id="register"/>
       <Button layoutX="437.0" layoutY="14.0" mnemonicParsing="false" onAction="#enter_action"
         prefHeight="31.0" prefWidth="87.0" text="Enter" fx:id="enter"/>
-      <TextArea layoutY="391.0" prefHeight="70.0" prefWidth="248.0" styleClass="textArea"
-        text="If you dont have an account&#10; you can register from here !" wrapText="true">
-         <font>
-            <Font name="Berlin Sans FB Demi Bold" size="18.0" />
-         </font></TextArea>
       <TableView layoutX="6.0" layoutY="56.0" prefHeight="283.0" prefWidth="515.0">
          <columns>
             <TableColumn prefWidth="75.0" text="C1"/>
