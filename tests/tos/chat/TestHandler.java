@@ -1,14 +1,10 @@
 package tos.chat;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.logging.Handler;
-import tos.chat.Server.*;
-import java.util.logging.LogRecord;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+import tos.chat.Server.*;
 
 public class TestHandler {
 

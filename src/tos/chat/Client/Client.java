@@ -48,14 +48,13 @@ public class Client {
 
       return false;
     }
-
   }
 
   protected int getServerPort() {
     System.out.print("Input a server port: ");
     int serverPort = ScreenShower.readInt();
     return serverPort;
-    //return 2020;
+    // return 2020;
   }
 
   protected String getUserName() {
@@ -100,11 +99,9 @@ public class Client {
       while (clientConnected) {
         String usermessege = ScreenShower.readString();
         sendTextMessage(usermessege);
-
       }
     } else {
       System.out.println("Some error occured");
-
     }
   }
 
@@ -132,8 +129,6 @@ public class Client {
 
         notifyConnectionStatusChanged(false);
       }
-
-
     }
 
     protected void processIncomingMessage(String message) {
@@ -169,9 +164,7 @@ public class Client {
             throw new IOException("Unexpected MessageType");
           }
         }
-
       }
-
     }
 
     protected void clientLoop() throws IOException, ClassNotFoundException {
@@ -188,6 +181,5 @@ public class Client {
         }
       }
     }
-
   }
 }

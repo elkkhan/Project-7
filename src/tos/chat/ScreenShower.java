@@ -1,10 +1,8 @@
 package tos.chat;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 
 public class ScreenShower {
 
@@ -23,7 +21,6 @@ public class ScreenShower {
       } catch (IOException e) {
         writeMessage("Some error occured.Try it once more!");
       }
-
     }
   }
 
@@ -51,5 +48,4 @@ public class ScreenShower {
     }
     return true;
   }
-
 }

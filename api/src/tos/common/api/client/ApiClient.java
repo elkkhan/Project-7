@@ -22,9 +22,7 @@ public class ApiClient {
   private static final String APPLICATION_KEYS = "ec3265c79b41917d82e0379765cdb5ca";
   private static final ConnectionManager connectionManager = new ConnectionManager();
 
-  /**
-   * @return base path for the API requests
-   */
+  /** @return base path for the API requests */
   public static String getBasePath() {
     return BASE_PATH;
   }

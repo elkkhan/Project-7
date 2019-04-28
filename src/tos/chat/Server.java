@@ -31,7 +31,6 @@ public class Server {
     while (true) {
       new Handler(serverSocket.accept()).start();
     }
-
   }
 
   public static boolean isInteger(String num) {
@@ -62,7 +61,6 @@ public class Server {
     } else {
       return false;
     }
-
   }
 
   public static void sendBroadcastMessage(Message message) {
@@ -102,8 +100,9 @@ public class Server {
           connectionMap.remove(username);
           sendBroadcastMessage(new Message(MessageType.USER_REMOVED, username));
         }
-        ScreenShower.writeMessage("Closed connection to a remote socket address: " + socket
-            .getInetAddress()); // + socketAddress);
+        ScreenShower.writeMessage(
+            "Closed connection to a remote socket address: "
+                + socket.getInetAddress()); // + socketAddress);
       }
     }
 
@@ -123,7 +122,6 @@ public class Server {
               connection.send(new Message(MessageType.NAME_ACCEPTED));
               return answer.getData();
             }
-
           }
         }
       }
@@ -141,13 +139,13 @@ public class Server {
         throws IOException, ClassNotFoundException {
       while (true) {
         Message message = connection.receive();
-                /*if(message.getType()== TEXT){
-                    String str = userName+": "+ message.getData();
-                    System.out.println(userName + message.getType());
-                    sendBroadcastMessage(new Message(TEXT,str));
-                }
+        /*if(message.getType()== TEXT){
+            String str = userName+": "+ message.getData();
+            System.out.println(userName + message.getType());
+            sendBroadcastMessage(new Message(TEXT,str));
+        }
 
-                */
+        */
         if (isTextType(message.getType())) {
           String str = userName + ": " + message.getData();
 
@@ -156,9 +154,6 @@ public class Server {
           ScreenShower.writeMessage("Something wrong, can't send a message");
         }
       }
-
     }
   }
-
-
 }
