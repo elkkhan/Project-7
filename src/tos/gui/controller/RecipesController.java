@@ -1,5 +1,3 @@
 package tos.gui.controller;
 
-public class RecipesController {
-
-}
+public class RecipesController {}

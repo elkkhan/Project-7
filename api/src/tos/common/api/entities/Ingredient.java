@@ -18,12 +18,8 @@ public class Ingredient {
     return weight;
   }
 
-
   @Override
   public String toString() {
-    return "Ingredient{" +
-        "text='" + text + '\'' +
-        ", weight=" + weight +
-        '}';
+    return "Ingredient{" + "text='" + text + '\'' + ", weight=" + weight + '}';
   }
 }

@@ -10,18 +10,12 @@ import tos.common.util.GuiUtils;
 
 public class MainPageController implements Initializable {
 
-  @FXML
-  private Button register;
-  @FXML
-  private Button enter;
-  @FXML
-  private Button login;
-
+  @FXML private Button register;
+  @FXML private Button enter;
+  @FXML private Button login;
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
-  }
+  public void initialize(URL location, ResourceBundle resources) {}
 
   @FXML
   public void login_action(ActionEvent event) throws Exception {
@@ -33,18 +27,15 @@ public class MainPageController implements Initializable {
   public void register_action(ActionEvent event) throws Exception {
     URL fxml = GuiUtils.getResource(getClass(), "Register.fxml");
     GuiUtils.openWindow(fxml, null, "Register");
-
   }
 
   @FXML
   public void enter_action(ActionEvent event) throws Exception {
-    //1. create URL for fxml
-    //URL fxml = GuiUtils.getResource(getClass(),"FXMLNAME.FXML);
+    // 1. create URL for fxml
+    // URL fxml = GuiUtils.getResource(getClass(),"FXMLNAME.FXML);
     // }
-    //2.Open the window
-    //GuiUtils.openWindow(fxml, null(if css is null or set in FXML),"TITLE");
+    // 2.Open the window
+    // GuiUtils.openWindow(fxml, null(if css is null or set in FXML),"TITLE");
 
   }
-
-
 }

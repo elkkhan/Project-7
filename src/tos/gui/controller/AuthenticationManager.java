@@ -9,7 +9,6 @@ import javax.crypto.spec.PBEKeySpec;
 import tos.gui.model.PasswordPair;
 import tos.gui.model.Users;
 
-
 public class AuthenticationManager {
 
   private static final SecureRandom RAND = new SecureRandom();
@@ -20,19 +19,17 @@ public class AuthenticationManager {
     return false;
   }
 
-
   public boolean authenticateAdmin(String email, char[] password) {
 
     return false;
   }
 
-  public Users registerUser(String name, String surname, String id, Date age, String email,
-      char[] password)
+  public Users registerUser(
+      String name, String surname, String id, Date age, String email, char[] password)
       throws NoSuchAlgorithmException, InvalidKeySpecException {
     PasswordPair p = hashPassword(password);
     return new Users(name, surname, id, age, email, p.getSalt());
   }
-
 
   public byte[] hashPassword(char[] password, byte[] salt)
       throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -42,19 +39,19 @@ public class AuthenticationManager {
   }
 
   /* We will use this function when we will have a database dont delete this. */
-/*	private boolean constantTimeEquals(byte[] a, byte[] b) {
-		if (a.length != b.length) {
-			return false;
-		}
+  /*	private boolean constantTimeEquals(byte[] a, byte[] b) {
+  	if (a.length != b.length) {
+  		return false;
+  	}
 
-		int result = 0;
-		for (int i = 0; i < a.length; i++) {
-			result |= a[i] ^ b[i];
-		}
+  	int result = 0;
+  	for (int i = 0; i < a.length; i++) {
+  		result |= a[i] ^ b[i];
+  	}
 
-		return result == 0;
-	}
-	*/
+  	return result == 0;
+  }
+  */
 
   private PasswordPair hashPassword(char[] password)
       throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -62,6 +59,4 @@ public class AuthenticationManager {
     RAND.nextBytes(salt);
     return new PasswordPair(hashPassword(password, salt), salt);
   }
-
-
 }

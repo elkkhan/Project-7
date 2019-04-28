@@ -13,25 +13,22 @@ import tos.common.api.exceptions.ParserException;
 
 public class ApiRecipeParser {
 
-  //@formatter:off
-  private static final String HITS_KEY         = "hits";
-  private static final String RECIPE_KEY       = "recipe";
-  private static final String LABEL            = "label";
-  private static final String IMAGE_URL        = "image";
-  private static final String RECIPE_URL       = "url";
-  private static final String YIELD            = "yield";
-  private static final String DIET_LABELS      = "dietLabels";
-  private static final String HEALTH_LABELS    = "healthLabels";
-  private static final String INGREDIENTS      = "ingredients";
-  private static final String CALORIES         = "calories";
-  private static final String TOTAL_WEIGHT     = "totalWeight";
-  //@formatter:on
+  // @formatter:off
+  private static final String HITS_KEY = "hits";
+  private static final String RECIPE_KEY = "recipe";
+  private static final String LABEL = "label";
+  private static final String IMAGE_URL = "image";
+  private static final String RECIPE_URL = "url";
+  private static final String YIELD = "yield";
+  private static final String DIET_LABELS = "dietLabels";
+  private static final String HEALTH_LABELS = "healthLabels";
+  private static final String INGREDIENTS = "ingredients";
+  private static final String CALORIES = "calories";
+  private static final String TOTAL_WEIGHT = "totalWeight";
+  // @formatter:on
 
-  /**
-   * Private empty constructor so that the class can't be instantiated. parse() is a static
-   */
-  private ApiRecipeParser() {
-  }
+  /** Private empty constructor so that the class can't be instantiated. parse() is a static */
+  private ApiRecipeParser() {}
 
   /**
    * Parses a JSON response from the API into {@link Recipe} objects
@@ -67,22 +64,17 @@ public class ApiRecipeParser {
    */
   @NotNull
   private static Recipe parseRecipe(@NotNull final JsonObject jsonRecipe) {
-    Recipe.Builder recipeBuilder = Recipe.builder()
-        .setUri(jsonRecipe.get(RECIPE_URL).getAsString())
-        .setLabel(jsonRecipe.get(LABEL).getAsString())
-        .setImageUrl(jsonRecipe.get(IMAGE_URL).getAsString())
-        .setYield(jsonRecipe.get(YIELD).getAsDouble())
-        .setCalories(jsonRecipe.get(CALORIES).getAsDouble())
-        .setTotalWeight(jsonRecipe.get(TOTAL_WEIGHT).getAsDouble())
-        .setHealthLabels(
-            ApiHealthLabelParser.parse(
-                jsonRecipe.getAsJsonArray(HEALTH_LABELS)))
-        .setDietLabels(
-            ApiDietLabelParser.parse(
-                jsonRecipe.getAsJsonArray(DIET_LABELS)))
-        .setIngredients(
-            ApiIngredientParser.parse(
-                jsonRecipe.getAsJsonArray(INGREDIENTS)));
+    Recipe.Builder recipeBuilder =
+        Recipe.builder()
+            .setUri(jsonRecipe.get(RECIPE_URL).getAsString())
+            .setLabel(jsonRecipe.get(LABEL).getAsString())
+            .setImageUrl(jsonRecipe.get(IMAGE_URL).getAsString())
+            .setYield(jsonRecipe.get(YIELD).getAsDouble())
+            .setCalories(jsonRecipe.get(CALORIES).getAsDouble())
+            .setTotalWeight(jsonRecipe.get(TOTAL_WEIGHT).getAsDouble())
+            .setHealthLabels(ApiHealthLabelParser.parse(jsonRecipe.getAsJsonArray(HEALTH_LABELS)))
+            .setDietLabels(ApiDietLabelParser.parse(jsonRecipe.getAsJsonArray(DIET_LABELS)))
+            .setIngredients(ApiIngredientParser.parse(jsonRecipe.getAsJsonArray(INGREDIENTS)));
     return recipeBuilder.build();
   }
 }

@@ -1,30 +1,12 @@
 package tos.common.api.entities;
 
 public enum Diet {
-  balanced(
-      "Balanced",
-      "balanced",
-      "Protein/Fat/Carb values in 15/35/50 ratio"),
-  high_fiber(
-      "High-Fiber",
-      "high-fiber",
-      "More than 5g fiber per serving"),
-  high_protein(
-      "High-Protein",
-      "high-protein",
-      "More than 50% of total calories from proteins"),
-  low_carb(
-      "Low-Carb",
-      "low-carb",
-      "Less than 20% of total calories from carbs"),
-  low_fat(
-      "Low-Fat",
-      "low-fat",
-      "Less than 15% of total calories from fat"),
-  low_sodium(
-      "Low-Sodium",
-      "low-sodium",
-      "Less than 140mg Na per serving");
+  balanced("Balanced", "balanced", "Protein/Fat/Carb values in 15/35/50 ratio"),
+  high_fiber("High-Fiber", "high-fiber", "More than 5g fiber per serving"),
+  high_protein("High-Protein", "high-protein", "More than 50% of total calories from proteins"),
+  low_carb("Low-Carb", "low-carb", "Less than 20% of total calories from carbs"),
+  low_fat("Low-Fat", "low-fat", "Less than 15% of total calories from fat"),
+  low_sodium("Low-Sodium", "low-sodium", "Less than 140mg Na per serving");
 
   private static Diet[] ALL_VALUES = Diet.values();
   private final String label;
@@ -50,8 +32,7 @@ public enum Diet {
    */
   public static Diet getByLabel(String label) {
     for (Diet diet : ALL_VALUES) {
-      if (diet.label.equals(label)
-          || diet.apiParameter.equalsIgnoreCase(label)) {
+      if (diet.label.equals(label) || diet.apiParameter.equalsIgnoreCase(label)) {
         return diet;
       }
     }
@@ -72,7 +53,6 @@ public enum Diet {
     }
     return null;
   }
-
 
   /**
    * Gets api parameter.

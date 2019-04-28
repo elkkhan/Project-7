@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-
 public class Connection implements Closeable {
 
   private final Socket socket;
@@ -30,9 +29,7 @@ public class Connection implements Closeable {
     synchronized (in) {
       return (Message) in.readObject();
     }
-
   }
-
 
   @Override
   public void close() throws IOException {
@@ -41,4 +38,3 @@ public class Connection implements Closeable {
     socket.close();
   }
 }
-

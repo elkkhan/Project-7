@@ -36,6 +36,4 @@ public class MainPage extends Application {
       e.printStackTrace();
     }
   }
-
-
 }

@@ -1,13 +1,10 @@
 package tos.chat;
 
-import org.junit.jupiter.api.Test;
-import tos.chat.Client.Client;
-
-import java.io.IOException;
-import java.net.Socket;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+import tos.chat.Client.Client;
 
 public class TestClient {
 
