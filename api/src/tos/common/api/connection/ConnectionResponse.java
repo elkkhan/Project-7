@@ -20,25 +20,19 @@ public class ConnectionResponse {
     this.responseCode = responseCode;
   }
 
-  /**
-   * @return final redirect URL in case GET request performs redirection
-   */
+  /** @return final redirect URL in case GET request performs redirection */
   @Nullable
   public String getFinalRedirectUrl() {
     return finalRedirectUrl;
   }
 
-  /**
-   * @return full content of GET request response
-   */
+  /** @return full content of GET request response */
   @NotNull
   public String getResponseContent() {
     return responseContent;
   }
 
-  /**
-   * @return full content of GET request response parsed into a List<String> line-by-line
-   */
+  /** @return full content of GET request response parsed into a List<String> line-by-line */
   @NotNull
   public List<String> getResponseContentAsList() {
     return Arrays.asList(responseContent.split("\r\n|\r|\n"));
@@ -54,4 +48,3 @@ public class ConnectionResponse {
     return responseCode;
   }
 }
-

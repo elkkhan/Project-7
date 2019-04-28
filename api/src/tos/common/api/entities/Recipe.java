@@ -17,8 +17,7 @@ public class Recipe {
   private Double totalTime;
   private NutrientInfo[] totalNutrients;
 
-  private Recipe() {
-  }
+  private Recipe() {}
 
   public static Builder builder() {
     return new Builder();
@@ -74,28 +73,43 @@ public class Recipe {
 
   @Override
   public String toString() {
-    return "Recipe{" +
-        "uri='" + uri + '\'' +
-        ", label='" + label + '\'' +
-        ", imageUrl='" + imageUrl + '\'' +
-        ", source='" + source + '\'' +
-        ", yield=" + yield +
-        ", dietLabels=" + Arrays.toString(dietLabels) +
-        ", healthLabels=" + Arrays.toString(healthLabels) +
-        ", ingredients=" + Arrays.toString(ingredients) +
-        ", calories=" + calories +
-        ", totalWeight=" + totalWeight +
-        ", totalTime=" + totalTime +
-        ", totalNutrients=" + Arrays.toString(totalNutrients) +
-        '}';
+    return "Recipe{"
+        + "uri='"
+        + uri
+        + '\''
+        + ", label='"
+        + label
+        + '\''
+        + ", imageUrl='"
+        + imageUrl
+        + '\''
+        + ", source='"
+        + source
+        + '\''
+        + ", yield="
+        + yield
+        + ", dietLabels="
+        + Arrays.toString(dietLabels)
+        + ", healthLabels="
+        + Arrays.toString(healthLabels)
+        + ", ingredients="
+        + Arrays.toString(ingredients)
+        + ", calories="
+        + calories
+        + ", totalWeight="
+        + totalWeight
+        + ", totalTime="
+        + totalTime
+        + ", totalNutrients="
+        + Arrays.toString(totalNutrients)
+        + '}';
   }
 
   public static class Builder {
 
     private Recipe recipe = new Recipe();
 
-    private Builder() {
-    }
+    private Builder() {}
 
     public Builder setUri(String uri) {
       this.recipe.uri = uri;

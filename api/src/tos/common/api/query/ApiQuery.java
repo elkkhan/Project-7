@@ -19,24 +19,23 @@ public class ApiQuery {
   private final String QUERY;
   private final String APP_ID;
   private final String APP_KEY;
-  //@formatter:off
-  private String FROM           = "0";
-  private String TO             = null;
-  private String INGR           = null;
-  private String DIET           = null;
-  private String CALORIES       = null;
-  private String TIME           = null;
-  private String encodedQuery   = null;
-  private List<String> HEALTH   = new ArrayList<>();
+  // @formatter:off
+  private String FROM = "0";
+  private String TO = null;
+  private String INGR = null;
+  private String DIET = null;
+  private String CALORIES = null;
+  private String TIME = null;
+  private String encodedQuery = null;
+  private List<String> HEALTH = new ArrayList<>();
   private List<String> EXCLUDED = new ArrayList<>();
-  //@formatter:on
+  // @formatter:on
 
   private ApiQuery(@NotNull String api_id, @NotNull String api_key, @NotNull String qSearch) {
     this.APP_ID = api_id;
     this.APP_KEY = api_key;
     this.QUERY = qSearch;
   }
-
 
   public String getQUERY() {
     return QUERY;
@@ -189,11 +188,10 @@ public class ApiQuery {
     if (caloriesOrTime == null) {
       return true;
     }
-    Pattern pattern1 = Pattern.compile("^[1-9]\\d*$");//123
-    Pattern pattern2 = Pattern.compile("^[1-9]\\d*\\+$");//123+
-    Pattern pattern3 = Pattern.compile("^[1-9]\\d*-\\d*$");//123-456
-    if (pattern1.matcher(caloriesOrTime).matches() || pattern2.matcher(caloriesOrTime)
-        .matches()) {
+    Pattern pattern1 = Pattern.compile("^[1-9]\\d*$"); // 123
+    Pattern pattern2 = Pattern.compile("^[1-9]\\d*\\+$"); // 123+
+    Pattern pattern3 = Pattern.compile("^[1-9]\\d*-\\d*$"); // 123-456
+    if (pattern1.matcher(caloriesOrTime).matches() || pattern2.matcher(caloriesOrTime).matches()) {
       return true;
     }
     if (pattern3.matcher(caloriesOrTime).matches()) {
@@ -220,19 +218,16 @@ public class ApiQuery {
     return true;
   }
 
-
   @Override
   public String toString() {
     return encodedQuery;
   }
 
-
   public static class Builder {
 
     private final ApiQuery apiQuery;
 
-    public Builder(@NotNull String api_id, @NotNull String api_key,
-        @NotNull String qSearch) {
+    public Builder(@NotNull String api_id, @NotNull String api_key, @NotNull String qSearch) {
       this.apiQuery = new ApiQuery(api_id, api_key, qSearch);
     }
 
