@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "FORMATTING ALL JAVA FILES AS PER GOOGLE JAVA CODE STYLE"
+find . -name "*.java" -type f -exec echo "FORMATTING " {} \; -exec java -jar extra/google-java-format.jar -i {} \; -exec git add {} \;
+echo "DONE"

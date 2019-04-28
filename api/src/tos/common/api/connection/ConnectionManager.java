@@ -28,9 +28,7 @@ public class ConnectionManager {
   private final int timeoutSeconds;
   private final CloseableHttpClient connection = getCloseableHttpClient();
 
-  /**
-   * Default constructor, 30 seconds timeout
-   */
+  /** Default constructor, 30 seconds timeout */
   public ConnectionManager() {
     timeoutSeconds = 30;
   }
@@ -44,9 +42,7 @@ public class ConnectionManager {
     this.timeoutSeconds = timeoutSeconds;
   }
 
-  /**
-   * @return an apache http client, set SSL trust strategy to trust everything
-   */
+  /** @return an apache http client, set SSL trust strategy to trust everything */
   private CloseableHttpClient getCloseableHttpClient() {
     try {
       return HttpClients.custom()
@@ -65,7 +61,7 @@ public class ConnectionManager {
 
   /**
    * @return timeout configuration, set to 30 seconds. program should not wait for more than 30
-   * seconds for a url to respond.
+   *     seconds for a url to respond.
    */
   private RequestConfig getTimeoutConfig() {
     RequestConfig.Builder config = RequestConfig.custom();

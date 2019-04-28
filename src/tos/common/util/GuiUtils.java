@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 
 public class GuiUtils {
 
-  private GuiUtils() {
-  }
+  private GuiUtils() {}
 
   private static void showMessage(String title, String contentText) {
     Alert alert = new Alert(AlertType.INFORMATION);

@@ -5,8 +5,7 @@ import tos.common.api.entities.Health;
 
 final class ApiHealthLabelParser {
 
-  private ApiHealthLabelParser() {
-  }
+  private ApiHealthLabelParser() {}
 
   /**
    * Parses a "health" JSON array from the API response into an array of {@link Health} enum

@@ -17,7 +17,4 @@ public class PasswordPair {
   public byte[] getSalt() {
     return salt;
   }
-
 }
-
-

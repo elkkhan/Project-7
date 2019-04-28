@@ -6,8 +6,7 @@ import tos.common.api.entities.Ingredient;
 
 final class ApiIngredientParser {
 
-  private ApiIngredientParser() {
-  }
+  private ApiIngredientParser() {}
 
   static Ingredient[] parse(JsonArray jsonIngredients) {
     return new Gson().fromJson(jsonIngredients, Ingredient[].class);
