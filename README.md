@@ -1,5 +1,7 @@
 ## Java client for Edamam Recipe API
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/58414515fa724f818b3891f308d475c3)](https://app.codacy.com/app/elkkhan/Project-7?utm_source=github.com&utm_medium=referral&utm_content=elkkhan/Project-7&utm_campaign=Badge_Grade_Dashboard)
+
 The project uses Edamam Recipe API for retrieving information about recipes.<br>
 This branch implements a Java client for an easier usage of the API.
 
