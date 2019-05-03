@@ -13,7 +13,7 @@ public class GuiUtils {
 
   private GuiUtils() {}
 
-  private static void showMessage(String title, String contentText) {
+  public static void showMessage(String title, String contentText) {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle(title);
     alert.setHeaderText(null);
@@ -47,4 +47,6 @@ public class GuiUtils {
     stage.setScene(scene);
     stage.show();
   }
+
+
 }
