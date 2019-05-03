@@ -34,7 +34,7 @@ public class RegisterController implements Initializable {
       String url = "jdbc:mysql://db4free.net:3306/tosdatabase";
       String username = "eltetools";
       String password = "123456789";
-      // Class.forName(c);
+      // Class.forName();
       Connection conn = DriverManager.getConnection(url, username, password);
       System.out.println("connected");
 
@@ -47,7 +47,7 @@ public class RegisterController implements Initializable {
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-    //datePicker.setConverter(new DateConverter());
+
   }
 
   public boolean isCorrectForRegister(
