@@ -17,6 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import tos.common.util.GuiUtils;
 
+
 public class RegisterController implements Initializable {
 
   String nameT;
@@ -34,8 +35,9 @@ public class RegisterController implements Initializable {
       String url = "jdbc:mysql://db4free.net:3306/tosdatabase";
       String username = "eltetools";
       String password = "123456789";
-      // Class.forName();
-      Connection conn = DriverManager.getConnection(url, username, password);
+      //Class.forName(driver);
+      con = DriverManager.getConnection(url, username, password);
+
       System.out.println("connected");
 
 
@@ -87,27 +89,30 @@ public class RegisterController implements Initializable {
       String idd = id.getText();
       String eemail = email.getText();
       SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-      //String bd = df.format(datePicker.getConverter().toString());
+      String bd = df.format(datePicker.getValue().toEpochDay());
       byte[] ppassword = password.getText().getBytes();
 
+
       PreparedStatement ps;
-      String query = "INSERT INTO `Users`(`NAME`, `SURNAME`, `ID`, `AGE`, `E-MAIL`, `PASSWORD`) VALUES (?,?,?,?,?,?,?)";
-      // try {
+      String query;
+      query = "INSERT INTO `Users`(`NAME`, `SURNAME`, `ID`, `AGE`, `E-MAIL`, `PASSWORD`) VALUES (?,?,?,?,?,?)";
+      try {
       ps = getConnection().prepareStatement(query);
       ps.setString(1, username);
       ps.setString(2, ssurname);
       ps.setString(3, idd);
-      ps.setString(4, "11-11-2019");
+        ps.setString(4, bd);
       ps.setString(5, eemail);
       ps.setBytes(6, ppassword);
       if (ps.executeUpdate() > 0) {
         GuiUtils.showMessage("Done", "done");
       }
-      // } catch (Exception r) {
-      //  System.out.println(r);
-      //}
+      } catch (Exception r) {
+        System.out.println(r);
+      }
     }
   }
+
 
   /*private void closeRegister() {
   	((Stage) id.getScene().getWindow()).close();
