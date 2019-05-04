@@ -2,6 +2,8 @@ package tos.common.util;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -48,5 +50,23 @@ public class GuiUtils {
     stage.show();
   }
 
+  public static Connection getConnection() {
+    Connection con = null;
+    try {
+      String driver = "com.mysql.jdbc.Driver";
+      String url = "jdbc:mysql://db4free.net:3306/tosdatabase";
+      String username = "eltetools";
+      String password = "123456789";
+      //Class.forName(driver);
+      con = DriverManager.getConnection(url, username, password);
+
+      System.out.println("connected");
+
+
+    } catch (Exception e) {
+      e.getStackTrace();
+    }
+    return con;
+  }
 
 }

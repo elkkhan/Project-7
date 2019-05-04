@@ -3,8 +3,6 @@ package tos.gui.controller;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -28,24 +26,7 @@ public class RegisterController implements Initializable {
   @FXML private TextField id;
   @FXML private TextField email;
 
-  public static Connection getConnection() {
-    Connection con = null;
-    try {
-      String driver = "com.mysql.jdbc.Driver";
-      String url = "jdbc:mysql://db4free.net:3306/tosdatabase";
-      String username = "eltetools";
-      String password = "123456789";
-      //Class.forName(driver);
-      con = DriverManager.getConnection(url, username, password);
 
-      System.out.println("connected");
-
-
-    } catch (Exception e) {
-      e.getStackTrace();
-    }
-    return con;
-  }
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
@@ -97,7 +78,7 @@ public class RegisterController implements Initializable {
       String query;
       query = "INSERT INTO `Users`(`NAME`, `SURNAME`, `ID`, `AGE`, `E-MAIL`, `PASSWORD`) VALUES (?,?,?,?,?,?)";
       try {
-      ps = getConnection().prepareStatement(query);
+        ps = GuiUtils.getConnection().prepareStatement(query);
       ps.setString(1, username);
       ps.setString(2, ssurname);
       ps.setString(3, idd);

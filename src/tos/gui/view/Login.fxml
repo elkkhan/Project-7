@@ -8,8 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tos.gui.controller.LoginController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
+  minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+  xmlns="http://javafx.com/javafx/8" fx:controller="tos.gui.controller.LoginController">
    <children>
       <VBox>
          <children>
@@ -37,7 +38,7 @@
                   <VBox>
                      <children>
                         <!--  <PasswordField layoutX="264.0" layoutY="167.0" />-->
-                        <TextField fx:id="email" stylesheets="@newstyle.css">
+                        <TextField stylesheets="@newstyle.css" fx:id="name">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin></TextField>
@@ -45,7 +46,8 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin></PasswordField>
-                        <Button fx:id="login" mnemonicParsing="false"  stylesheets="@newstyle.css" text="LOGIN">
+                        <Button mnemonicParsing="false" onAction="#loginButton"
+                          stylesheets="@newstyle.css" text="LOGIN" fx:id="login">
                            <VBox.margin>
                               <Insets left="100.0" top="9.0" />
                            </VBox.margin>
