@@ -20,7 +20,7 @@
       <TextField fx:id="surname" layoutX="149.0" layoutY="106.0" />
       <TextField fx:id="id" layoutX="449.0" layoutY="106.0" />
       <TextField fx:id="email" layoutX="449.0" layoutY="74.0" />
-      <Button layoutX="212.0" layoutY="216.0" mnemonicParsing="false" text="Back"/>
+     <Button layoutX="212.0" layoutY="216.0" mnemonicParsing="false" onAction="#back" text="Back"/>
       <Button layoutX="310.0" layoutY="216.0" mnemonicParsing="false" onAction="#register"
         text="Save"/>
       <Label layoutX="390.0" layoutY="143.0" text="Password" />

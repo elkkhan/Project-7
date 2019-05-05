@@ -10,10 +10,12 @@
 <?import javafx.scene.layout.VBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-  xmlns="http://javafx.com/javafx/8" fx:controller="tos.gui.controller.LoginController">
+  xmlns="http://javafx.com/javafx/8" fx:controller="tos.gui.controller.LoginControllerForUser">
    <children>
       <VBox>
          <children>
+           <Label prefHeight="17.0" prefWidth="282.0"
+             text="                               LOGIN FOR USER" fx:id="namex"/>
             <HBox>
                <children>
                   <VBox>
@@ -26,7 +28,8 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin></Label>
-                        <Button fx:id="register" mnemonicParsing="false" stylesheets="@newstyle.css" text="REGISTER">
+                       <Button mnemonicParsing="false" onAction="#registerButton"
+                         stylesheets="@newstyle.css" text="REGISTER" fx:id="register">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin></Button>
@@ -46,12 +49,14 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin></PasswordField>
-                        <Button mnemonicParsing="false" onAction="#loginButton"
-                          stylesheets="@newstyle.css" text="LOGIN" fx:id="login">
+                       <Button mnemonicParsing="false" onAction="#loginButton"
+                         stylesheets="@newstyle.css" text="LOGIN" fx:id="login">
                            <VBox.margin>
                               <Insets left="100.0" top="9.0" />
                            </VBox.margin>
                         </Button>
+                       <Button mnemonicParsing="false" onAction="#back" prefHeight="25.0"
+                         prefWidth="81.0" stylesheets="@newstyle.css" text="BACK" fx:id="back"/>
                      </children>
 
 

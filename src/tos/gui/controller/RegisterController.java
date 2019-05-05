@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import tos.common.util.GuiUtils;
 
 
@@ -94,17 +95,17 @@ public class RegisterController implements Initializable {
     }
   }
 
+  private void close() {
+    ((Stage) name.getScene().getWindow()).close();
+  }
 
-  /*private void closeRegister() {
-  	((Stage) id.getScene().getWindow()).close();
-  }*/
+  @FXML
+  public void back(ActionEvent event) {
+    URL fxml = GuiUtils.getResource(getClass(), "MainPage.fxml");
+    GuiUtils.openWindow(fxml, null, "Main Page");
+    close();
+  }
 
-  /*@FXML
-  public void BackFromRegister(ActionEvent event)
-  		throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-  	loadPage("../view/Login.fxml");
-  	closeRegister();
 
-  }*/
 
 }
