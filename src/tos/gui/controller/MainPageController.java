@@ -66,13 +66,8 @@ public class MainPageController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     YieldColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Double>("Yield"));
     LabelColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("Label"));
-    NutrientsColumn
-        .setCellValueFactory(new PropertyValueFactory<Recipe, NutrientInfo[]>("NutrientInfo"));
     CaloriesColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Double>("Calories"));
-    WeightColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Double>("Weight"));
-    TimeColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Double>("Time"));
-    IngredientColumn
-        .setCellValueFactory(new PropertyValueFactory<Recipe, Ingredient[]>("Ingredient"));
+
 
     try {
       mainTable.setItems(ListRecipes());
@@ -115,10 +110,10 @@ public class MainPageController implements Initializable {
   public ObservableList<Recipe> ListRecipes()
       throws ConnectionException, ParserException, QueryBuilderException {
     ApiClient apiClient = new ApiClient();
-    ApiQuery query = apiClient.createQuery("yields").build();
+    ApiQuery query = apiClient.createQuery("Recipe").build();
     List<Recipe> chickenPizza = apiClient.executeQuery(query);
     System.out.println(chickenPizza.size());
-
+    //test-dsa
     ObservableList<Recipe> observableList = FXCollections.observableList(chickenPizza);
     return observableList;
 
