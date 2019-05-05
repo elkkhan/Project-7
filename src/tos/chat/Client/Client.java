@@ -54,10 +54,11 @@ public class Client {
   }
 
   protected int getServerPort() {
-    System.out.print("Input a server port: ");
+    /*System.out.print("Input a server port: ");
     int serverPort = ScreenShower.readInt();
     return serverPort;
-    // return 2020;
+    */
+     return 2020;
   }
 
   protected String getUserName() {
