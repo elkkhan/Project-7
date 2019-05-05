@@ -49,8 +49,8 @@ public class GuiView {
   public String getServerAddress() {
     return JOptionPane.showInputDialog(
         frame,
-        "Введите адрес сервера:",
-        "Конфигурация клиента",
+        "Input a port number:",
+        "Client config",
         JOptionPane.QUESTION_MESSAGE);
   }
 
@@ -61,8 +61,8 @@ public class GuiView {
   public String getUserName() {
     return JOptionPane.showInputDialog(
         frame,
-        "Введите ваше имя:",
-        "Конфигурация клиента",
+        "Input your name:",
+        "Client config",
         JOptionPane.QUESTION_MESSAGE);
   }
 
@@ -85,8 +85,6 @@ public class GuiView {
 
 
   }
-
-
   public void refreshMessages() {
     messages.append(controller.getModel().getNewMessage() + "\n");
   }
