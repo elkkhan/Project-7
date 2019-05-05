@@ -1,98 +1,121 @@
 package tos.gui.controller;
 
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import tos.common.api.entities.Ingredient;
+import tos.common.api.client.ApiClient;
 import tos.common.api.entities.Recipe;
+import tos.common.api.exceptions.ConnectionException;
+import tos.common.api.exceptions.ParserException;
+import tos.common.api.exceptions.QueryBuilderException;
+import tos.common.api.query.ApiQuery;
+import tos.common.util.GuiUtils;
 
 
 public class RecipesForUserController implements Initializable {
 
   @FXML
-  private TableColumn<Recipe, Double> receipeWeightColumn;
+  private TextField yield;
 
   @FXML
-  private TextField ingredientsField;
+  private TextField calories;
 
   @FXML
-  private TextField timeField;
-
-  @FXML
-  private TextField nameField;
+  private TextField label;
 
   @FXML
   private ImageView imageView;
 
-  @FXML
-  private TextField brandnamefield11;
 
-  @FXML
-  private TableColumn<Recipe, Double> receipeTimeColumn;
 
   @FXML
   private TableView<Recipe> tableViewRecipes;
 
   @FXML
-  private TableColumn<Recipe, String> receipeNameColumn;
+  private TableColumn<Recipe, String> LabelColumn;
 
   @FXML
-  private TableColumn<Recipe, Double> receipeYieldColumn;
+  private TableColumn<Recipe, Double> YieldColumn;
+
 
   @FXML
-  private TextField brandnamefield111;
-
-  @FXML
-  private TableColumn<Recipe, Double> receipeCaloriesColumn;
-
-  @FXML
-  private TextField caloriesField;
+  private TableColumn<Recipe, Double> CaloriesColumn;
 
   @FXML
   private Label name;
 
-  @FXML
-  private TextField weightField;
-
-  @FXML
-  private TableColumn<Ingredient, String> receipeIngredientsColumn;
-
-  @FXML
-  private TextField yieldField;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //setColumnContent();
+    YieldColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Double>("Yield"));
+    LabelColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("Label"));
+    CaloriesColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Double>("Calories"));
+    try {
+      tableViewRecipes.setItems(ListRecipes());
+    } catch (ConnectionException e) {
+      e.printStackTrace();
+    } catch (ParserException e) {
+      e.printStackTrace();
+    } catch (QueryBuilderException e) {
+      e.printStackTrace();
+    }
+
   }
-  /*
-  public void setColumnContent() {
 
-    receipeNameColumn.setCellValueFactory(new Callback<CellDataFeatures<Recipe, String>, ObservableValue<String>>() {
+  public ObservableList<Recipe> ListRecipes()
+      throws ConnectionException, ParserException, QueryBuilderException {
+    ApiClient apiClient = new ApiClient();
+    ApiQuery query = apiClient.createQuery("Recipe").build();
+    List<Recipe> chickenPizza = apiClient.executeQuery(query);
+    System.out.println(chickenPizza.size());
+    //test-dsa
+    ObservableList<Recipe> observableList = FXCollections.observableList(chickenPizza);
+    return observableList;
 
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<Recipe, String> data) {
-						return ObjectConstant.<String>valueOf(data.getValue().getLabel());
-					}
+  }
 
-				});
+  @FXML // I will fix this register.
+  public void add(ActionEvent event)
+      throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
 
-    receipeYieldColumn.setCellValueFactory(new Callback<CellDataFeatures<Receipt, Double>, ObservableValue<Double>>() {
+    if (calories.getText().equals("") || yield.getText().equals("") || label.getText().equals("")) {
+      GuiUtils.showMessage("Error", "You have empty fields.");
+    } else {
+      String llabel = label.getText();
+      String yyield = yield.getText();
+      String ccalories = calories.getText();
 
-      @Override
-      public ObservableValue<Double> call(CellDataFeatures<Recipe, Double> data) {
-        return ObjectConstant.valueOf(data.getValue().getYield());
+      PreparedStatement ps;
+      String query;
+      query = "INSERT INTO `Recipes`(`YIELD`, `LABEL`, `CALORIES`) VALUES (?,?,?)";
+      try {
+        ps = GuiUtils.getConnection().prepareStatement(query);
+        ps.setString(1, llabel);
+        ps.setString(2, yyield);
+        ps.setString(3, ccalories);
+        if (ps.executeUpdate() > 0) {
+          GuiUtils.showMessage("Done", "done");
+        }
+      } catch (Exception r) {
+        System.out.println(r);
       }
-
-    });
-
+    }
   }
-*/
 
 
 }

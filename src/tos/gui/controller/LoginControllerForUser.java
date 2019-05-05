@@ -64,8 +64,8 @@ public class LoginControllerForUser implements Initializable {
       ps.setString(2, pass);
       rs = ps.executeQuery();
       if (rs.next()) {
-        URL fxml = GuiUtils.getResource(getClass(), "Admin.fxml");
-        GuiUtils.openWindow(fxml, null, "Admin");
+        URL fxml = GuiUtils.getResource(getClass(), "CheckRecipesForUser.fxml");
+        GuiUtils.openWindow(fxml, null, "Upload Recipes");
       } else {
         GuiUtils.showMessage("", "Error");
       }

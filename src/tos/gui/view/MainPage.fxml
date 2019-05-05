@@ -18,12 +18,9 @@
      <TableView layoutX="6.0" layoutY="56.0" prefHeight="283.0" prefWidth="515.0" fx:id="mainTable">
          <columns>
            <TableColumn prefWidth="75.0" text="Yield" fx:id="YieldColumn"/>
-           <TableColumn prefWidth="75.0" text="Label" fx:id="LabelColumn"/>
-           <TableColumn prefWidth="75.0" text="Ingredient" fx:id="IngredientColumn"/>
-           <TableColumn prefWidth="75.0" text="Calories" fx:id="CaloriesColumn"/>
-           <TableColumn prefWidth="75.0" text="Weight" fx:id="WeightColumn"/>
-           <TableColumn prefWidth="65.0" text="Time" fx:id="TimeColumn"/>
-           <TableColumn prefWidth="85.0" text="Nutrients" fx:id="NutrientsColumn"/>
+           <TableColumn prefWidth="130.0" text="Label" fx:id="LabelColumn"/>
+           <TableColumn prefWidth="169.0" text="Ingredient" fx:id="IngredientColumn"/>
+           <TableColumn prefWidth="139.0" text="Calories" fx:id="CaloriesColumn"/>
          </columns>
       </TableView>
      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="330.0" layoutY="351.0"
