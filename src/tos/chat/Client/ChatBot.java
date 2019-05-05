@@ -60,7 +60,7 @@ public class ChatBot extends Client {
 
             }
             if (dish != null) {
-              sendTextMessage(String.format("Information %s: %s", name, dish));
+              sendTextMessage(String.format("Information  %s: %s", name, dish));
             }
           }
         }
