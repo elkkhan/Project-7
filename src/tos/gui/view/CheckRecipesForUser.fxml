@@ -36,6 +36,6 @@
       <TextField layoutX="285.0" layoutY="298.0" prefHeight="25.0" prefWidth="104.0"
         promptText="xxx" fx:id="label"/>
       <Button layoutX="529.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0"
-        prefWidth="97.0" text="Chat" fx:id="add1"/>
+        onAction="#chat" prefWidth="97.0" text="Chat" fx:id="chat"/>
 	</children>
 </AnchorPane>

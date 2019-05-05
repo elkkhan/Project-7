@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+
 public class Server {
 
   private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
@@ -49,18 +50,11 @@ public class Server {
   }
 
   public static boolean isCorrectPort(int port) {
-    if (port > 1024 && port < 65535) {
-      return true;
-    }
-    return false;
+    return port > 1024 && port < 65535;
   }
 
   public static boolean isTextType(MessageType messageType) {
-    if (messageType == TEXT) {
-      return true;
-    } else {
-      return false;
-    }
+    return messageType == TEXT;
   }
 
   public static void sendBroadcastMessage(Message message) {

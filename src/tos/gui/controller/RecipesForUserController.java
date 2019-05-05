@@ -18,6 +18,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import tos.chat.Client.ClientGuiController;
+import tos.chat.Server;
 import tos.common.api.client.ApiClient;
 import tos.common.api.entities.Recipe;
 import tos.common.api.exceptions.ConnectionException;
@@ -118,4 +120,10 @@ public class RecipesForUserController implements Initializable {
   }
 
 
+  @FXML
+  public void chat(ActionEvent event) {
+    Server sv = new Server();
+    ClientGuiController cgc = new ClientGuiController();
+
+  }
 }
