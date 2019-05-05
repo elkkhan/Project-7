@@ -47,11 +47,13 @@ public class GuiView {
   }
 
   public String getServerAddress() {
-    return JOptionPane.showInputDialog(
+    /*return JOptionPane.showInputDialog(
         frame,
         "Input a port number:",
         "Client config",
-        JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.QUESTION_MESSAGE);*/
+    String lhost="localhost";
+    return lhost;
   }
 
   public int getServerPort() {
@@ -59,11 +61,13 @@ public class GuiView {
   }
 
   public String getUserName() {
-    return JOptionPane.showInputDialog(
+    /*return JOptionPane.showInputDialog(
         frame,
         "Input your name:",
         "Client config",
-        JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.QUESTION_MESSAGE);*/
+    String name = " ";
+    return name;
   }
 
   public void notifyConnectionStatusChanged(boolean clientConnected) {

@@ -21,13 +21,16 @@ public class Client {
   }
 
   protected String getServerAddress() {
-    System.out.print("Input an IP: ");
+    /*System.out.print("Input an IP: ");
     String ipAddress = ScreenShower.readString();
     while (!isValidIP(ipAddress)) {
       System.out.print("Your ip has to consist from 4 digital numbers e.g.(192.168.0.3)! ");
       ipAddress = ScreenShower.readString();
     }
     return ipAddress;
+    */
+    String lhost="localhost";
+    return lhost;
   }
 
   public boolean isValidIP(String ip) {
@@ -58,13 +61,15 @@ public class Client {
   }
 
   protected String getUserName() {
-    System.out.print("Input your name: ");
+    /*System.out.print("Input your name: ");
     String username = ScreenShower.readString();
     while (!isFirstCapital(username)) {
       System.out.print("Your name has to start from a capital letter! ");
       username = ScreenShower.readString();
     }
     return username;
+    */
+    return "__";
   }
 
   public boolean isFirstCapital(String str) {

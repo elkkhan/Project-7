@@ -14,7 +14,7 @@ public class Server {
   private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
   public static void main(String[] args) throws IOException {
-    ServerSocket serverSocket = new ServerSocket();
+    /*ServerSocket serverSocket = new ServerSocket();
     ScreenShower.writeMessage("Please input server port: ");
     String servport = ScreenShower.readString();
     while (!isInteger(servport)) {
@@ -27,6 +27,10 @@ public class Server {
       port = ScreenShower.readInt();
     }
     serverSocket = new ServerSocket(port);
+    */
+    int port = 2020;
+    ServerSocket serverSocket = new ServerSocket(port);
+
 
     ScreenShower.writeMessage("Server " + port + " started...");
     while (true) {
