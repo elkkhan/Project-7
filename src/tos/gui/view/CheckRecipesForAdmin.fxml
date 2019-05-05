@@ -7,7 +7,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="661.0"   xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tos.gui.controller.RecipesController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
+  minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="661.0"
+  xmlns="http://javafx.com/javafx/8" fx:controller="tos.gui.controller.RecipesControllerForAdmin">
 
     <children>
 		<TableView fx:id="tableViewRecipes" prefHeight="181.0" prefWidth="652.0">

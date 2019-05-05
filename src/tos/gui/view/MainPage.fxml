@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="467.0" prefWidth="538.0" styleClass="mainPane" stylesheets="@newstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tos.gui.controller.MainPageController">
    <children>
      <Button layoutX="343.0" layoutY="14.0" mnemonicParsing="false" onAction="#login_action"
@@ -16,25 +15,20 @@
        prefWidth="96.0" text="Register" fx:id="register"/>
      <Button layoutX="437.0" layoutY="14.0" mnemonicParsing="false" onAction="#enter_action"
        prefHeight="31.0" prefWidth="87.0" text="Enter" fx:id="enter"/>
-     <TextArea layoutY="391.0" prefHeight="70.0" prefWidth="248.0" styleClass="textArea"
-       text="If you dont have an account&#10; you can register from here !" wrapText="true">
-         <font>
-            <Font name="Berlin Sans FB Demi Bold" size="18.0" />
-         </font></TextArea>
-      <TableView layoutX="6.0" layoutY="56.0" prefHeight="283.0" prefWidth="515.0">
+     <TableView layoutX="6.0" layoutY="56.0" prefHeight="283.0" prefWidth="515.0" fx:id="mainTable">
          <columns>
-           <TableColumn prefWidth="75.0" text="C1"/>
-           <TableColumn prefWidth="75.0" text="C2"/>
-           <TableColumn prefWidth="75.0" text="C2"/>
-           <TableColumn prefWidth="75.0" text="C2"/>
-           <TableColumn prefWidth="75.0" text="C2"/>
-           <TableColumn prefWidth="75.0" text="C2"/>
-           <TableColumn prefWidth="75.0" text="C2"/>
+           <TableColumn prefWidth="75.0" text="Yield" fx:id="YieldColumn"/>
+           <TableColumn prefWidth="75.0" text="Label" fx:id="LabelColumn"/>
+           <TableColumn prefWidth="75.0" text="Ingredient" fx:id="IngredientColumn"/>
+           <TableColumn prefWidth="75.0" text="Calories" fx:id="CaloriesColumn"/>
+           <TableColumn prefWidth="75.0" text="Weight" fx:id="WeightColumn"/>
+           <TableColumn prefWidth="65.0" text="Time" fx:id="TimeColumn"/>
+           <TableColumn prefWidth="85.0" text="Nutrients" fx:id="NutrientsColumn"/>
          </columns>
       </TableView>
      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="330.0" layoutY="351.0"
        pickOnBounds="true" preserveRatio="true"/>
-     <TextArea layoutX="248.0" layoutY="408.0" prefHeight="38.0" prefWidth="75.0"
+     <TextArea layoutX="248.0" layoutY="408.0" prefHeight="31.0" prefWidth="70.0"
        text="IMAGE :&#10;"/>
      <Label layoutX="48.0" layoutY="30.0" fx:id="name"/>
    </children>
