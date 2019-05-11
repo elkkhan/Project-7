@@ -9,7 +9,7 @@ public class ChatBot extends Client {
   public static void main(String[] args) {
     ChatBot bClient = new ChatBot();
 
-    bClient.run();
+    bClient.runSocketThread();
   }
 
   public class BotSocketThread extends SocketThread {

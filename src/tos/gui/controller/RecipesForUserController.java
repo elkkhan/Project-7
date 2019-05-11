@@ -1,6 +1,5 @@
 package tos.gui.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -108,12 +107,7 @@ public class RecipesForUserController implements Initializable {
   public void chat(ActionEvent event) {
     Server sv = new Server();
     ClientGuiController cgc = new ClientGuiController();
-
-    try {
-      sv.main(new String[] {});
-      cgc.main(new String[] {});
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    new Thread(sv).start();
+    new Thread(cgc).start();
   }
 }

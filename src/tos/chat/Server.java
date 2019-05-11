@@ -8,12 +8,12 @@ import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class Server {
+public class Server implements Runnable {
 
   private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
-  public static void main(String[] args) throws IOException {
-    /*ServerSocket serverSocket = new ServerSocket();
+  /*public static void main(String[] args) throws IOException {
+    ServerSocket serverSocket = new ServerSocket();
     ScreenShower.writeMessage("Please input server port: ");
     String servport = ScreenShower.readString();
     while (!isInteger(servport)) {
@@ -26,13 +26,33 @@ public class Server {
       port = ScreenShower.readInt();
     }
     serverSocket = new ServerSocket(port);
-    */
+
     int port = 2020;
     ServerSocket serverSocket = new ServerSocket(port);
 
     ScreenShower.writeMessage("Server " + port + " started...");
     while (true) {
       new Handler(serverSocket.accept()).start();
+    }
+  }*/
+
+  @Override
+  public void run() {
+    int port = 2020;
+    ServerSocket serverSocket = null;
+    try {
+      serverSocket = new ServerSocket(port);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    ScreenShower.writeMessage("Server " + port + " started...");
+    while (true) {
+      try {
+        new Handler(serverSocket.accept()).start();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
   }
 

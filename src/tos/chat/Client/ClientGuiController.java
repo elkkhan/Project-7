@@ -1,10 +1,10 @@
 package tos.chat.Client;
 
-public class ClientGuiController extends Client {
-
-  public static void main(String[] args) {
+public class ClientGuiController extends Client implements Runnable {
+  @Override
+  public void run() {
     ClientGuiController clientGui = new ClientGuiController();
-    clientGui.run();
+    clientGui.runSocketThread();
   }
 
   private ClientGuiModel model = new ClientGuiModel();
@@ -15,7 +15,7 @@ public class ClientGuiController extends Client {
     return socketThread;
   }
 
-  public void run() {
+  public void runSocketThread() {
     getSocketThread().run();
   }
 

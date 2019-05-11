@@ -17,7 +17,7 @@ public class Client {
   public static void main(String[] args) {
     Client client = new Client();
 
-    client.run();
+    client.runSocketThread();
   }
 
   protected String getServerAddress() {
@@ -85,11 +85,10 @@ public class Client {
     return newThread;
   }
 
-  public void run() {
+  public void runSocketThread() {
     SocketThread socketThread = getSocketThread();
     socketThread.setDaemon(true);
     socketThread.start();
-
     try {
       synchronized (this) {
         wait();
