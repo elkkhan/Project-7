@@ -57,16 +57,12 @@ public class GuiUtils {
       String url = "jdbc:mysql://db4free.net:3306/tosdatabase";
       String username = "eltetools";
       String password = "123456789";
-      //Class.forName(driver);
+      Class.forName(driver);
       con = DriverManager.getConnection(url, username, password);
-
       System.out.println("connected");
-
-
     } catch (Exception e) {
       e.getStackTrace();
     }
     return con;
   }
 }
-

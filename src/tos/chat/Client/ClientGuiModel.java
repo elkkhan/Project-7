@@ -11,10 +11,12 @@ public class ClientGuiModel {
   public Set<String> getAllUserNames() {
     return Collections.unmodifiableSet(allUserNames);
   }
-  public void addUser(String newUserName){
+
+  public void addUser(String newUserName) {
     allUserNames.add(newUserName);
   }
-  public void deleteUser(String userName){
+
+  public void deleteUser(String userName) {
     allUserNames.remove(userName);
   }
 
@@ -25,5 +27,4 @@ public class ClientGuiModel {
   public void setNewMessage(String newMessage) {
     this.newMessage = newMessage;
   }
-
 }

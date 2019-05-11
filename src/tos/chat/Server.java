@@ -8,7 +8,6 @@ import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 public class Server {
 
   private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
@@ -30,7 +29,6 @@ public class Server {
     */
     int port = 2020;
     ServerSocket serverSocket = new ServerSocket(port);
-
 
     ScreenShower.writeMessage("Server " + port + " started...");
     while (true) {

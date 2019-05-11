@@ -20,30 +20,23 @@ public class LoginControllerForAdmin implements Initializable {
 
   public Button login;
   AuthenticationManager authm;
-  @FXML
-  private TextField name;
-  @FXML
-  private TextField surname;
-  @FXML
-  private TextField id;
-  @FXML
-  private PasswordField password;
-  @FXML
-  private Button loginButton;
-  @FXML
-  private Button registerButton;
+  @FXML private TextField name;
+  @FXML private TextField surname;
+  @FXML private TextField id;
+  @FXML private PasswordField password;
+  @FXML private Button loginButton;
+  @FXML private Button registerButton;
 
   // Preferences pref; we will need this.
 
   @Override
-  public void initialize(URL arg0, ResourceBundle arg1) {
-  }
+  public void initialize(URL arg0, ResourceBundle arg1) {}
 
   private void close() {
     ((Stage) name.getScene().getWindow()).close();
   }
 
-  //@FXML
+  // @FXML
   public void registerButton(ActionEvent event) throws Exception {
     URL fxml = GuiUtils.getResource(getClass(), "Register.fxml");
     GuiUtils.openWindow(fxml, null, "Register");
@@ -74,7 +67,6 @@ public class LoginControllerForAdmin implements Initializable {
       System.out.println(e);
     }
     close();
-
   }
 
   @FXML
@@ -83,7 +75,4 @@ public class LoginControllerForAdmin implements Initializable {
     GuiUtils.openWindow(fxml, null, "Main Page");
     close();
   }
-
-
 }
-

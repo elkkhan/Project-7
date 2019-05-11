@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import tos.common.util.GuiUtils;
 
-
 public class RegisterController implements Initializable {
 
   String nameT;
@@ -27,12 +26,8 @@ public class RegisterController implements Initializable {
   @FXML private TextField id;
   @FXML private TextField email;
 
-
-
   @Override
-  public void initialize(URL arg0, ResourceBundle arg1) {
-
-  }
+  public void initialize(URL arg0, ResourceBundle arg1) {}
 
   public boolean isCorrectForRegister(
       String nameT, String surnameT, String idT, String emailT, String passwordT) {
@@ -74,21 +69,21 @@ public class RegisterController implements Initializable {
       String bd = df.format(datePicker.getValue().toEpochDay());
       byte[] ppassword = password.getText().getBytes();
 
-
       PreparedStatement ps;
       String query;
-      query = "INSERT INTO `Users`(`NAME`, `SURNAME`, `ID`, `AGE`, `E-MAIL`, `PASSWORD`) VALUES (?,?,?,?,?,?)";
+      query =
+          "INSERT INTO `Users`(`NAME`, `SURNAME`, `ID`, `AGE`, `E-MAIL`, `PASSWORD`) VALUES (?,?,?,?,?,?)";
       try {
         ps = GuiUtils.getConnection().prepareStatement(query);
-      ps.setString(1, username);
-      ps.setString(2, ssurname);
-      ps.setString(3, idd);
+        ps.setString(1, username);
+        ps.setString(2, ssurname);
+        ps.setString(3, idd);
         ps.setString(4, bd);
-      ps.setString(5, eemail);
-      ps.setBytes(6, ppassword);
-      if (ps.executeUpdate() > 0) {
-        GuiUtils.showMessage("Done", "done");
-      }
+        ps.setString(5, eemail);
+        ps.setBytes(6, ppassword);
+        if (ps.executeUpdate() > 0) {
+          GuiUtils.showMessage("Done", "done");
+        }
       } catch (Exception r) {
         System.out.println(r);
       }
@@ -105,7 +100,4 @@ public class RegisterController implements Initializable {
     GuiUtils.openWindow(fxml, null, "Main Page");
     close();
   }
-
-
-
 }

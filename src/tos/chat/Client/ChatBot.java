@@ -1,27 +1,25 @@
 package tos.chat.Client;
 
-//import com.sun.deploy.uitoolkit.ui.ScreenShower;
+// import com.sun.deploy.uitoolkit.ui.ScreenShower;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import tos.chat.Client.Client;
 import tos.chat.ScreenShower;
 
 public class ChatBot extends Client {
 
-  public static void main(String[] args){
+  public static void main(String[] args) {
     ChatBot bClient = new ChatBot();
 
     bClient.run();
   }
+
   public class BotSocketThread extends SocketThread {
     protected void clientMainLoop() throws IOException, ClassNotFoundException {
-      String hello = "Hello World! :) If you don't know what to cook today, just ask me! Type one word such as: pork, chicken, beef, pizza, pasta or soup";
+      String hello =
+          "Hello World! :) If you don't know what to cook today, just ask me! Type one word such as: pork, chicken, beef, pizza, pasta or soup";
       sendTextMessage(hello);
       super.clientCon();
-
     }
+
     @Override
     protected void processIncomingMessage(String message) {
       if (message != null) {
@@ -34,7 +32,7 @@ public class ChatBot extends Client {
             String text = massiv[1];
             switch (text) {
               case "pork":
-                //format = new SimpleDateFormat("d.MM.YYYY");
+                // format = new SimpleDateFormat("d.MM.YYYY");
                 break;
               case "chicken":
                 dish = "Lets see how to cook chicken";
@@ -57,7 +55,6 @@ public class ChatBot extends Client {
               case "lamb":
                 dish = "Lets see how to cook lamb";
                 break;
-
             }
             if (dish != null) {
               sendTextMessage(String.format("Information  %s: %s", name, dish));
@@ -68,18 +65,18 @@ public class ChatBot extends Client {
     }
   }
 
-
-  protected SocketThread getSocketThread(){
+  protected SocketThread getSocketThread() {
     BotSocketThread botSocketThread = new BotSocketThread();
     return botSocketThread;
   }
-  protected boolean shouldSendTextFromConsole(){
+
+  protected boolean shouldSendTextFromConsole() {
     return false;
   }
-  protected String getUserName(){
+
+  protected String getUserName() {
     String name = "dish_bot_" + ((int) (Math.random() * 100));
 
     return name;
   }
 }
-

@@ -11,13 +11,10 @@ import tos.common.util.GuiUtils;
 
 public class AskTypeController implements Initializable {
 
-  @FXML
-  private Label name;
+  @FXML private Label name;
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
-  }
+  public void initialize(URL location, ResourceBundle resources) {}
 
   @FXML
   public void back(ActionEvent event) {
@@ -43,6 +40,4 @@ public class AskTypeController implements Initializable {
   private void close() {
     ((Stage) name.getScene().getWindow()).close();
   }
-
-
 }

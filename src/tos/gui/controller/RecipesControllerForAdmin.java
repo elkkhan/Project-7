@@ -11,14 +11,10 @@ import tos.common.util.GuiUtils;
 
 public class RecipesControllerForAdmin implements Initializable {
 
-  @FXML
-  private Label name;
+  @FXML private Label name;
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
-  }
-
+  public void initialize(URL location, ResourceBundle resources) {}
 
   private void close() {
     ((Stage) name.getScene().getWindow()).close();
@@ -41,5 +37,4 @@ public class RecipesControllerForAdmin implements Initializable {
 
     close();
   }
-
 }

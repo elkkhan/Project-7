@@ -1,20 +1,14 @@
 package tos.chat.Client;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GuiView {
   private final ClientGuiController controller;
 
   private volatile boolean clientConnected = false;
-
 
   private JFrame frame = new JFrame("Чат");
   private JTextField textField = new JTextField(50);
@@ -38,21 +32,22 @@ public class GuiView {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
 
-    textField.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        controller.sendTextMessage(textField.getText());
-        textField.setText("");
-      }
-    });
+    textField.addActionListener(
+        new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+            controller.sendTextMessage(textField.getText());
+            textField.setText("");
+          }
+        });
   }
 
   public String getServerAddress() {
     /*return JOptionPane.showInputDialog(
-        frame,
-        "Input a port number:",
-        "Client config",
-        JOptionPane.QUESTION_MESSAGE);*/
-    String lhost="localhost";
+    frame,
+    "Input a port number:",
+    "Client config",
+    JOptionPane.QUESTION_MESSAGE);*/
+    String lhost = "localhost";
     return lhost;
   }
 
@@ -62,10 +57,10 @@ public class GuiView {
 
   public String getUserName() {
     /*return JOptionPane.showInputDialog(
-        frame,
-        "Input your name:",
-        "Client config",
-        JOptionPane.QUESTION_MESSAGE);*/
+    frame,
+    "Input your name:",
+    "Client config",
+    JOptionPane.QUESTION_MESSAGE);*/
     String name = " ";
     return name;
   }
@@ -74,21 +69,13 @@ public class GuiView {
     textField.setEditable(clientConnected);
     if (clientConnected) {
       JOptionPane.showMessageDialog(
-          frame,
-          "Соединение с сервером установлено",
-          "Чат",
-          JOptionPane.INFORMATION_MESSAGE);
-    }
-    else {
+          frame, "Соединение с сервером установлено", "Чат", JOptionPane.INFORMATION_MESSAGE);
+    } else {
       JOptionPane.showMessageDialog(
-          frame,
-          "Клиент не подключен к серверу",
-          "Чат",
-          JOptionPane.ERROR_MESSAGE);
+          frame, "Клиент не подключен к серверу", "Чат", JOptionPane.ERROR_MESSAGE);
     }
-
-
   }
+
   public void refreshMessages() {
     messages.append(controller.getModel().getNewMessage() + "\n");
   }

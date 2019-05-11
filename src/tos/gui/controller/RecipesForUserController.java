@@ -1,5 +1,6 @@
 package tos.gui.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -28,39 +29,25 @@ import tos.common.api.exceptions.QueryBuilderException;
 import tos.common.api.query.ApiQuery;
 import tos.common.util.GuiUtils;
 
-
 public class RecipesForUserController implements Initializable {
 
-  @FXML
-  private TextField yield;
+  @FXML private TextField yield;
 
-  @FXML
-  private TextField calories;
+  @FXML private TextField calories;
 
-  @FXML
-  private TextField label;
+  @FXML private TextField label;
 
-  @FXML
-  private ImageView imageView;
+  @FXML private ImageView imageView;
 
+  @FXML private TableView<Recipe> tableViewRecipes;
 
+  @FXML private TableColumn<Recipe, String> LabelColumn;
 
-  @FXML
-  private TableView<Recipe> tableViewRecipes;
+  @FXML private TableColumn<Recipe, Double> YieldColumn;
 
-  @FXML
-  private TableColumn<Recipe, String> LabelColumn;
+  @FXML private TableColumn<Recipe, Double> CaloriesColumn;
 
-  @FXML
-  private TableColumn<Recipe, Double> YieldColumn;
-
-
-  @FXML
-  private TableColumn<Recipe, Double> CaloriesColumn;
-
-  @FXML
-  private Label name;
-
+  @FXML private Label name;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -76,7 +63,6 @@ public class RecipesForUserController implements Initializable {
     } catch (QueryBuilderException e) {
       e.printStackTrace();
     }
-
   }
 
   public ObservableList<Recipe> ListRecipes()
@@ -85,10 +71,9 @@ public class RecipesForUserController implements Initializable {
     ApiQuery query = apiClient.createQuery("Recipe").build();
     List<Recipe> chickenPizza = apiClient.executeQuery(query);
     System.out.println(chickenPizza.size());
-    //test-dsa
+    // test-dsa
     ObservableList<Recipe> observableList = FXCollections.observableList(chickenPizza);
     return observableList;
-
   }
 
   @FXML // I will fix this register.
@@ -119,11 +104,16 @@ public class RecipesForUserController implements Initializable {
     }
   }
 
-
   @FXML
   public void chat(ActionEvent event) {
     Server sv = new Server();
     ClientGuiController cgc = new ClientGuiController();
 
+    try {
+      sv.main(new String[] {});
+      cgc.main(new String[] {});
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

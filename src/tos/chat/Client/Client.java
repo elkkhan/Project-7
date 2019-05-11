@@ -29,7 +29,7 @@ public class Client {
     }
     return ipAddress;
     */
-    String lhost="localhost";
+    String lhost = "localhost";
     return lhost;
   }
 
@@ -58,7 +58,7 @@ public class Client {
     int serverPort = ScreenShower.readInt();
     return serverPort;
     */
-     return 2020;
+    return 2020;
   }
 
   protected String getUserName() {

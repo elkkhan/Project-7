@@ -26,48 +26,35 @@ import tos.common.util.GuiUtils;
 
 public class MainPageController implements Initializable {
 
-  @FXML
-  private TableView<Recipe> mainTable;
+  @FXML private TableView<Recipe> mainTable;
 
-  @FXML
-  private TableColumn<Recipe, Double> YieldColumn;
+  @FXML private TableColumn<Recipe, Double> YieldColumn;
 
-  @FXML
-  private TableColumn<Recipe, Double> TimeColumn;
+  @FXML private TableColumn<Recipe, Double> TimeColumn;
 
-  @FXML
-  private TableColumn<Recipe, Double> CaloriesColumn;
+  @FXML private TableColumn<Recipe, Double> CaloriesColumn;
 
-  @FXML
-  private Label name;
+  @FXML private Label name;
 
-  @FXML
-  private Button enter;
+  @FXML private Button enter;
 
-  @FXML
-  private TableColumn<Recipe, NutrientInfo[]> NutrientsColumn;
+  @FXML private TableColumn<Recipe, NutrientInfo[]> NutrientsColumn;
 
-  @FXML
-  private Button login;
+  @FXML private Button login;
 
-  @FXML
-  private TableColumn<Recipe, String> LabelColumn;
+  @FXML private TableColumn<Recipe, String> LabelColumn;
 
-  @FXML
-  private TableColumn<Recipe, Double> WeightColumn;
+  @FXML private TableColumn<Recipe, Double> WeightColumn;
 
-  @FXML
-  private Button register;
+  @FXML private Button register;
 
-  @FXML
-  private TableColumn<Recipe, Ingredient[]> IngredientColumn;
+  @FXML private TableColumn<Recipe, Ingredient[]> IngredientColumn;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     YieldColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Double>("Yield"));
     LabelColumn.setCellValueFactory(new PropertyValueFactory<Recipe, String>("Label"));
     CaloriesColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Double>("Calories"));
-
 
     try {
       mainTable.setItems(ListRecipes());
@@ -78,7 +65,6 @@ public class MainPageController implements Initializable {
     } catch (QueryBuilderException e) {
       e.printStackTrace();
     }
-
   }
 
   @FXML
@@ -104,7 +90,6 @@ public class MainPageController implements Initializable {
     URL fxml = GuiUtils.getResource(getClass(), "CheckRecipesForAdmin.fxml");
     GuiUtils.openWindow(fxml, null, "Recipes");
     close();
-
   }
 
   public ObservableList<Recipe> ListRecipes()
@@ -113,10 +98,8 @@ public class MainPageController implements Initializable {
     ApiQuery query = apiClient.createQuery("Recipe").build();
     List<Recipe> chickenPizza = apiClient.executeQuery(query);
     System.out.println(chickenPizza.size());
-    //test-dsa
+    // test-dsa
     ObservableList<Recipe> observableList = FXCollections.observableList(chickenPizza);
     return observableList;
-
   }
-
 }

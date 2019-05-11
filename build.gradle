@@ -12,6 +12,7 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.4.0'
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
     compile(project("api"))
 }
 
