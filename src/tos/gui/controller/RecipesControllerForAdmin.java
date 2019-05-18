@@ -89,7 +89,17 @@ public class RecipesControllerForAdmin implements Initializable {
   }
 
   private void refreshTable() {
-    tableViewRecipes.setItems(oblist);
+    try {
+      PreparedStatement ps;
+      Connection con = GuiUtils.getConnection();
+      ResultSet rs;
+      String sql = "select * from Recipes";
+      ps = con.prepareStatement(sql);
+      rs = ps.executeQuery();
+      tableViewRecipes.setItems(oblist);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
   private void close() {
     ((Stage) name.getScene().getWindow()).close();
@@ -133,15 +143,16 @@ public class RecipesControllerForAdmin implements Initializable {
 
         if (ps.executeUpdate() > 0) {
           GuiUtils.showMessage("Done", "done");
-          // refreshTable();
         }
       } catch (Exception r) {
         System.out.println(r);
-        // refreshTable();
       }
-      //  refreshTable();
     }
-    // refreshTable();
+
   }
 
+  @FXML
+  private void delete(ActionEvent event) {
+    tableViewRecipes.getItems().removeAll(tableViewRecipes.getSelectionModel().getSelectedItem());
+  }
 }

@@ -25,4 +25,10 @@ public class AdminController implements Initializable {
     GuiUtils.openWindow(fxml, null, null);
     close();
   }
+
+  public void checkUsers(ActionEvent event) throws Exception {
+    URL fxml = GuiUtils.getResource(getClass(), "CheckUsers.fxml");
+    GuiUtils.openWindow(fxml, null, null);
+    close();
+  }
 }

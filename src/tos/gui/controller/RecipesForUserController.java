@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import tos.chat.Client.ClientGuiController;
 import tos.chat.Server;
 import tos.common.api.client.ApiClient;
@@ -103,6 +104,21 @@ public class RecipesForUserController implements Initializable {
     }
   }
 
+  private void close() {
+    ((Stage) name.getScene().getWindow()).close();
+  }
+
+  @FXML
+  public void back(ActionEvent event) {
+    URL fxml = GuiUtils.getResource(getClass(), "LoginForUser.fxml");
+    GuiUtils.openWindow(fxml, null, "User");
+    close();
+  }
+
+  @FXML
+  public void logout(ActionEvent event) {
+    close();
+  }
   @FXML
   public void chat(ActionEvent event) {
     Server sv = new Server();
