@@ -41,7 +41,7 @@ public class ChatBot extends Client {
                 dish = "Lets see how to cook beef";
                 break;
               case "pizza":
-                dish = "Lets see how to cook pizza";
+                dish = "Lets see how to cook " + pizza_random() +" pizza";
                 break;
               case "pasta":
                 dish = "Lets see how to cook pasta";
@@ -90,8 +90,39 @@ public class ChatBot extends Client {
     meat_dish.put(7, "BBQ ribs");
 
     Random random = new Random();
-    int rnd_meat = random.nextInt(5);
+    int rnd_meat = random.nextInt(7);
+
     String dish = meat_dish.get(rnd_meat);
+    return dish;
+  }
+
+  public String pizza_random(){
+    HashMap<Integer,String> pizza = new HashMap<Integer, String>();
+    pizza.put(1, "Margarita");
+    pizza.put(2, "Hawaii");
+    pizza.put(3, "4 Cheeses");
+    pizza.put(4, "Vegeterian");
+    pizza.put(5, "BBQ ");
+    pizza.put(6, "Salami");
+
+
+    Random random = new Random();
+    int rnd_pizza = random.nextInt(6);
+
+    String dish = pizza.get(rnd_pizza);
+    return dish;
+  }
+
+  public String pasta_random(){
+    HashMap<Integer,String> pasta = new HashMap<Integer, String>();
+    pasta.put(1, "Carbonara");
+    pasta.put(2, "Po flotski");
+    pasta.put(3, "Bolognese");
+
+    Random random = new Random();
+    int rnd_pasta = random.nextInt(3);
+
+    String dish = pasta.get(rnd_pasta);
     return dish;
   }
 }
