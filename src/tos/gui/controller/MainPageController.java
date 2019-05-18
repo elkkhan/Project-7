@@ -94,6 +94,7 @@ public class MainPageController implements Initializable {
 
   public ObservableList<Recipe> ListRecipes()
       throws ConnectionException, ParserException, QueryBuilderException {
+
     ApiClient apiClient = new ApiClient();
     ApiQuery query = apiClient.createQuery("Recipe").build();
     List<Recipe> chickenPizza = apiClient.executeQuery(query);
