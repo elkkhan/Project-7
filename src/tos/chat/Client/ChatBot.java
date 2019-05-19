@@ -37,23 +37,17 @@ public class ChatBot extends Client {
               case "meat":
                 dish = "Lets see how to cook " + meat_random();
                 break;
-              case "beef":
-                dish = "Lets see how to cook beef";
-                break;
               case "pizza":
                 dish = "Lets see how to cook " + pizza_random() +" pizza";
                 break;
               case "pasta":
-                dish = "Lets see how to cook pasta";
+                dish = "Lets see how to cook pasta "+ pasta_random();
                 break;
               case "soup":
-                dish = "Lets see how to cook soup";
+                dish = "Lets see how to cook soup "+ soup_random()+" soup";
                 break;
               case "salat":
-                dish = "Lets see how to cook salat";
-                break;
-              case "lamb":
-                dish = "Lets see how to cook lamb";
+                dish = "Lets see how to cook salad "+ salad_random()+" salad";
                 break;
             }
             if (dish != null) {
@@ -123,6 +117,31 @@ public class ChatBot extends Client {
     int rnd_pasta = random.nextInt(3);
 
     String dish = pasta.get(rnd_pasta);
+    return dish;
+  }
+  public String soup_random(){
+    HashMap<Integer,String> soup = new HashMap<Integer, String>();
+    soup.put(1, "Tom Yum");
+    soup.put(2, "Borsch");
+    soup.put(3, "Cream soup");
+    soup.put(4, "Guliash");
+
+    Random random = new Random();
+    int rnd_soup = random.nextInt(4);
+
+    String dish = soup.get(rnd_soup);
+    return dish;
+  }
+  public String salad_random(){
+    HashMap<Integer,String> salad = new HashMap<Integer, String>();
+    salad.put(1, "Ceasar");
+    salad.put(2, "Vegeterian");
+    salad.put(3, "Caprese");
+
+    Random random = new Random();
+    int rnd_salad = random.nextInt(3);
+
+    String dish = salad.get(rnd_salad);
     return dish;
   }
 }
