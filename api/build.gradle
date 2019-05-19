@@ -40,4 +40,7 @@ sourceSets {
 jar {
     archivesBaseName = 'tos.common.api'
     version = this.version
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

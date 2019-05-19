@@ -121,6 +121,7 @@ public class RecipesForUserController implements Initializable {
   public void logout(ActionEvent event) {
     close();
   }
+
   @FXML
   public void chat(ActionEvent event) {
     Server sv = new Server();

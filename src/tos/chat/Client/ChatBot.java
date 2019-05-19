@@ -3,7 +3,6 @@ package tos.chat.Client;
 // import com.sun.deploy.uitoolkit.ui.ScreenShower;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 import tos.chat.ScreenShower;
 
@@ -38,16 +37,16 @@ public class ChatBot extends Client {
                 dish = "Lets see how to cook " + meat_random();
                 break;
               case "pizza":
-                dish = "Lets see how to cook " + pizza_random() +" pizza";
+                dish = "Lets see how to cook " + pizza_random() + " pizza";
                 break;
               case "pasta":
-                dish = "Lets see how to cook pasta "+ pasta_random();
+                dish = "Lets see how to cook pasta " + pasta_random();
                 break;
               case "soup":
-                dish = "Lets see how to cook soup "+ soup_random()+" soup";
+                dish = "Lets see how to cook soup " + soup_random() + " soup";
                 break;
               case "salat":
-                dish = "Lets see how to cook salad "+ salad_random()+" salad";
+                dish = "Lets see how to cook salad " + salad_random() + " salad";
                 break;
             }
             if (dish != null) {
@@ -73,8 +72,9 @@ public class ChatBot extends Client {
 
     return name;
   }
-  public String meat_random(){
-    HashMap<Integer,String> meat_dish = new HashMap<Integer, String>();
+
+  public String meat_random() {
+    HashMap<Integer, String> meat_dish = new HashMap<Integer, String>();
     meat_dish.put(1, "Curry chicken");
     meat_dish.put(2, "Boiled beef");
     meat_dish.put(3, "Fried pork");
@@ -90,15 +90,14 @@ public class ChatBot extends Client {
     return dish;
   }
 
-  public String pizza_random(){
-    HashMap<Integer,String> pizza = new HashMap<Integer, String>();
+  public String pizza_random() {
+    HashMap<Integer, String> pizza = new HashMap<Integer, String>();
     pizza.put(1, "Margarita");
     pizza.put(2, "Hawaii");
     pizza.put(3, "4 Cheeses");
     pizza.put(4, "Vegeterian");
     pizza.put(5, "BBQ ");
     pizza.put(6, "Salami");
-
 
     Random random = new Random();
     int rnd_pizza = random.nextInt(6);
@@ -107,8 +106,8 @@ public class ChatBot extends Client {
     return dish;
   }
 
-  public String pasta_random(){
-    HashMap<Integer,String> pasta = new HashMap<Integer, String>();
+  public String pasta_random() {
+    HashMap<Integer, String> pasta = new HashMap<Integer, String>();
     pasta.put(1, "Carbonara");
     pasta.put(2, "Po flotski");
     pasta.put(3, "Bolognese");
@@ -119,8 +118,9 @@ public class ChatBot extends Client {
     String dish = pasta.get(rnd_pasta);
     return dish;
   }
-  public String soup_random(){
-    HashMap<Integer,String> soup = new HashMap<Integer, String>();
+
+  public String soup_random() {
+    HashMap<Integer, String> soup = new HashMap<Integer, String>();
     soup.put(1, "Tom Yum");
     soup.put(2, "Borsch");
     soup.put(3, "Cream soup");
@@ -132,8 +132,9 @@ public class ChatBot extends Client {
     String dish = soup.get(rnd_soup);
     return dish;
   }
-  public String salad_random(){
-    HashMap<Integer,String> salad = new HashMap<Integer, String>();
+
+  public String salad_random() {
+    HashMap<Integer, String> salad = new HashMap<Integer, String>();
     salad.put(1, "Ceasar");
     salad.put(2, "Vegeterian");
     salad.put(3, "Caprese");

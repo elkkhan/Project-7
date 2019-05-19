@@ -23,26 +23,16 @@ import tos.gui.model.Users;
 public class UserControllerForAdmin implements Initializable {
 
   ObservableList<Users> oblist = FXCollections.observableArrayList();
-  @FXML
-  private TableColumn<Users, String> namecolumn;
-  @FXML
-  private Label currentUser;
-  @FXML
-  private Button logout;
-  @FXML
-  private TableColumn<Users, String> surnamecolumn;
-  @FXML
-  private TableView<Users> tableViewUsers;
-  @FXML
-  private TableColumn<Users, String> idcolumn;
-  @FXML
-  private Button back;
-  @FXML
-  private TableColumn<Users, String> emailcolumn;
-  @FXML
-  private Button deleteuser;
-  @FXML
-  private TableColumn<Users, Date> agecolumn;
+  @FXML private TableColumn<Users, String> namecolumn;
+  @FXML private Label currentUser;
+  @FXML private Button logout;
+  @FXML private TableColumn<Users, String> surnamecolumn;
+  @FXML private TableView<Users> tableViewUsers;
+  @FXML private TableColumn<Users, String> idcolumn;
+  @FXML private Button back;
+  @FXML private TableColumn<Users, String> emailcolumn;
+  @FXML private Button deleteuser;
+  @FXML private TableColumn<Users, Date> agecolumn;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -50,10 +40,14 @@ public class UserControllerForAdmin implements Initializable {
     try {
       ResultSet rs = con.createStatement().executeQuery("select * from Users");
       while (rs.next()) {
-        oblist.add(new Users(rs.getString("Name"), rs.getString("Surname"),
-            rs.getString("ID"), rs.getDate("Age"), rs.getString("E-Mail"),
-            rs.getBytes("Password")));
-
+        oblist.add(
+            new Users(
+                rs.getString("Name"),
+                rs.getString("Surname"),
+                rs.getString("ID"),
+                rs.getDate("Age"),
+                rs.getString("E-Mail"),
+                rs.getBytes("Password")));
       }
     } catch (SQLException e) {
       e.printStackTrace();

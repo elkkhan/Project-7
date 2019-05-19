@@ -25,48 +25,31 @@ import tos.gui.model.RecipesModel;
 public class RecipesControllerForAdmin implements Initializable {
 
   @FXML private Label name;
-  @FXML
-  private Button add;
+  @FXML private Button add;
 
-  @FXML
-  private TextField ingredientsField;
+  @FXML private TextField ingredientsField;
 
   ObservableList<RecipesModel> oblist = FXCollections.observableArrayList();
-  @FXML
-  private TableColumn<RecipesModel, Ingredient> ingredientscolumn;
+  @FXML private TableColumn<RecipesModel, Ingredient> ingredientscolumn;
 
-  @FXML
-  private TextField timeField;
+  @FXML private TextField timeField;
 
-  @FXML
-  private TextField nameField;
-  @FXML
-  private TableColumn<RecipesModel, Double> yieldcolumn;
+  @FXML private TextField nameField;
+  @FXML private TableColumn<RecipesModel, Double> yieldcolumn;
 
-  @FXML
-  private Button back;
-  @FXML
-  private TextField labelfield;
-  @FXML
-  private TableColumn<RecipesModel, Double> weightcolumn;
-  @FXML
-  private TableView<RecipesModel> tableViewRecipes;
-  @FXML
-  private TableColumn<RecipesModel, Double> timecolumn;
-  @FXML
-  private TableColumn<RecipesModel, String> namecolumn;
+  @FXML private Button back;
+  @FXML private TextField labelfield;
+  @FXML private TableColumn<RecipesModel, Double> weightcolumn;
+  @FXML private TableView<RecipesModel> tableViewRecipes;
+  @FXML private TableColumn<RecipesModel, Double> timecolumn;
+  @FXML private TableColumn<RecipesModel, String> namecolumn;
 
-  @FXML
-  private Button logout;
+  @FXML private Button logout;
 
-  @FXML
-  private TextField caloriesField;
-  @FXML
-  private TableColumn<RecipesModel, Double> caloriescolumn;
-  @FXML
-  private TextField yieldField;
-  @FXML
-  private TableColumn<RecipesModel, String> labelcolumn;
+  @FXML private TextField caloriesField;
+  @FXML private TableColumn<RecipesModel, Double> caloriescolumn;
+  @FXML private TextField yieldField;
+  @FXML private TableColumn<RecipesModel, String> labelcolumn;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -74,9 +57,9 @@ public class RecipesControllerForAdmin implements Initializable {
     try {
       ResultSet rs = con.createStatement().executeQuery("select * from Recipes");
       while (rs.next()) {
-        oblist.add(new RecipesModel(rs.getString("Yield"), rs.getString("Label"),
-            rs.getDouble("Calories")));
-
+        oblist.add(
+            new RecipesModel(
+                rs.getString("Yield"), rs.getString("Label"), rs.getDouble("Calories")));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -101,10 +84,10 @@ public class RecipesControllerForAdmin implements Initializable {
       e.printStackTrace();
     }
   }
+
   private void close() {
     ((Stage) name.getScene().getWindow()).close();
   }
-
 
   @FXML
   public void back(ActionEvent event) {
@@ -123,8 +106,7 @@ public class RecipesControllerForAdmin implements Initializable {
 
     if (yieldField.getText().matches("")
         || caloriesField.getText().matches("")
-        || labelfield.getText().equals("")
-    ) {
+        || labelfield.getText().equals("")) {
       GuiUtils.showMessage("Error", "You have empty fields.");
     } else {
       String yield = yieldField.getText();
@@ -133,8 +115,7 @@ public class RecipesControllerForAdmin implements Initializable {
 
       PreparedStatement ps;
       String query;
-      query =
-          "INSERT INTO `Recipes`(`YIELD`, `LABEL`, `CALORIES`) VALUES (?,?,?)";
+      query = "INSERT INTO `Recipes`(`YIELD`, `LABEL`, `CALORIES`) VALUES (?,?,?)";
       try {
         ps = GuiUtils.getConnection().prepareStatement(query);
         ps.setString(1, yield);
@@ -148,7 +129,6 @@ public class RecipesControllerForAdmin implements Initializable {
         System.out.println(r);
       }
     }
-
   }
 
   @FXML

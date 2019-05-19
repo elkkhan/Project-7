@@ -54,3 +54,12 @@ sourceSets {
     test.java.srcDirs = ['tests']
     main.resources.srcDirs = ['src/tos/gui/view']
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'tos.gui.main.MainPage'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

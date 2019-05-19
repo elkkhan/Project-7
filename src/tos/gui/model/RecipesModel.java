@@ -1,13 +1,11 @@
 package tos.gui.model;
 
-
 public class RecipesModel {
 
   private String yield, label;
   private double calories;
 
-  public RecipesModel() {
-  }
+  public RecipesModel() {}
 
   public RecipesModel(String yield, String label, double calories) {
     this.yield = yield;

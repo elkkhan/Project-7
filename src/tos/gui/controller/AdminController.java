@@ -11,8 +11,8 @@ import tos.common.util.GuiUtils;
 
 public class AdminController implements Initializable {
 
-  @FXML
-  private Label name;
+  @FXML private Label name;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
 

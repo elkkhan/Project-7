@@ -57,12 +57,9 @@ public class GuiView {
 
   public String getUserName() {
     return JOptionPane.showInputDialog(
-    frame,
-    "Input your name:",
-    "Client config",
-    JOptionPane.QUESTION_MESSAGE);
-    //String name = " ";
-    //return name;
+        frame, "Input your name:", "Client config", JOptionPane.QUESTION_MESSAGE);
+    // String name = " ";
+    // return name;
   }
 
   public void notifyConnectionStatusChanged(boolean clientConnected) {

@@ -7,6 +7,7 @@ import tos.chat.Connection;
 import tos.chat.Message;
 import tos.chat.MessageType;
 import tos.chat.ScreenShower;
+
 public class Client {
 
   protected Connection connection;
@@ -18,6 +19,7 @@ public class Client {
 
     client.runSocketThread();
   }
+
   public boolean isValidIP(String ip) {
     String[] parts = ip.split("\\.");
 
@@ -44,7 +46,6 @@ public class Client {
     return letter.equals(letter.toUpperCase());
   }
 
-
   public void runSocketThread() {
     SocketThread socketThread = getSocketThread();
     socketThread.setDaemon(true);
@@ -69,6 +70,7 @@ public class Client {
       System.out.println("Some error occured");
     }
   }
+
   public class SocketThread extends Thread {
 
     public void run() {
@@ -137,12 +139,13 @@ public class Client {
     }
   }
 
-  protected String getServerAddress(){
-   // System.out.print("Input an IP: ");
-    //String ipAddress= ScreenShower.readString();
+  protected String getServerAddress() {
+    // System.out.print("Input an IP: ");
+    // String ipAddress= ScreenShower.readString();
     String lhost = "localhost";
     return lhost;
   }
+
   protected int getServerPort() {
     /*System.out.print("Input a server port: ");
     int serverPort = ScreenShower.readInt();
@@ -163,22 +166,23 @@ public class Client {
     return "__";
   }
 
-  protected boolean shouldSendTextFromConsole(){
+  protected boolean shouldSendTextFromConsole() {
     return true;
   }
-  protected SocketThread getSocketThread(){
+
+  protected SocketThread getSocketThread() {
     SocketThread newThread = new SocketThread();
 
     return newThread;
   }
 
-  public void run(){
+  public void run() {
     SocketThread socketThread = getSocketThread();
     socketThread.setDaemon(true);
     socketThread.start();
 
     try {
-      synchronized (this){
+      synchronized (this) {
         wait();
       }
 
@@ -187,32 +191,28 @@ public class Client {
       System.exit(1);
     }
 
-    if(clientConnected){
+    if (clientConnected) {
       System.out.println("Соединение установлено. Для выхода наберите команду 'exit'.");
-      while(clientConnected){
+      while (clientConnected) {
         String usermessege = ScreenShower.readString();
-        if(usermessege=="exit"){
+        if (usermessege == "exit") {
           break;
-        }
-        else {
-          if(shouldSendTextFromConsole()) sendTextMessage(usermessege);
+        } else {
+          if (shouldSendTextFromConsole()) sendTextMessage(usermessege);
         }
       }
-    }
-    else{
+    } else {
       System.out.println("Произошла ошибка во время работы клиента.");
-
     }
   }
 
-  protected void sendTextMessage(String text){
+  protected void sendTextMessage(String text) {
     try {
       connection.send(new Message(MessageType.TEXT, text));
 
-    }
-    catch (IOException e){
+    } catch (IOException e) {
       System.out.println("Can not be sended");
-      clientConnected=false;
+      clientConnected = false;
     }
   }
 }
