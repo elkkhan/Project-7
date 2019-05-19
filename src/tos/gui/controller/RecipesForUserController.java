@@ -62,6 +62,8 @@ public class RecipesForUserController implements Initializable {
       e.printStackTrace();
     } catch (QueryBuilderException e) {
       e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 

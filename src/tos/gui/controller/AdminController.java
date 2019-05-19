@@ -31,4 +31,9 @@ public class AdminController implements Initializable {
     GuiUtils.openWindow(fxml, null, null);
     close();
   }
+
+  @FXML
+  public void logout(ActionEvent event) {
+    close();
+  }
 }

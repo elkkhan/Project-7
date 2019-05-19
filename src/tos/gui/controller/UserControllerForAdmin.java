@@ -58,7 +58,7 @@ public class UserControllerForAdmin implements Initializable {
     } catch (SQLException e) {
       e.printStackTrace();
     }
- 
+
     namecolumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
     surnamecolumn.setCellValueFactory(new PropertyValueFactory<>("Surname"));
     idcolumn.setCellValueFactory(new PropertyValueFactory<>("ID"));

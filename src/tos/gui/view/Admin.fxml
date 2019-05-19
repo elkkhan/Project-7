@@ -15,6 +15,8 @@
      <Label layoutX="220.0" layoutY="81.0" prefHeight="17.0" prefWidth="185.0"
        stylesheets="@newstyle.css" text="WELCOME TO THE ADMIN PANEL" fx:id="name"/>
       <Label fx:id="currentUser" layoutX="33.0" layoutY="51.0" prefHeight="17.0" prefWidth="581.0" stylesheets="@newstyle.css" />
-      <Button fx:id="logout" layoutX="251.0" layoutY="219.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="144.0" stylesheets="@newstyle.css" text="Logout" />
+     <Button layoutX="251.0" layoutY="219.0" mnemonicParsing="false" onAction="#logout"
+       prefHeight="25.0" prefWidth="144.0" stylesheets="@newstyle.css" text="Logout"
+       fx:id="logout"/>
    </children>
 </AnchorPane>

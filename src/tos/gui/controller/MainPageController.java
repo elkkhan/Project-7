@@ -87,7 +87,7 @@ public class MainPageController implements Initializable {
 
   @FXML
   public void enter_action(ActionEvent event) throws Exception {
-    URL fxml = GuiUtils.getResource(getClass(), "CheckRecipesForAdmin.fxml");
+    URL fxml = GuiUtils.getResource(getClass(), "CheckRecipesForUser.fxml");
     GuiUtils.openWindow(fxml, null, "Recipes");
     close();
   }
