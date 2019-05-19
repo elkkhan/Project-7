@@ -7,7 +7,6 @@ import tos.chat.Connection;
 import tos.chat.Message;
 import tos.chat.MessageType;
 import tos.chat.ScreenShower;
-
 public class Client {
 
   protected Connection connection;
@@ -19,20 +18,6 @@ public class Client {
 
     client.runSocketThread();
   }
-
-  protected String getServerAddress() {
-    /*System.out.print("Input an IP: ");
-    String ipAddress = ScreenShower.readString();
-    while (!isValidIP(ipAddress)) {
-      System.out.print("Your ip has to consist from 4 digital numbers e.g.(192.168.0.3)! ");
-      ipAddress = ScreenShower.readString();
-    }
-    return ipAddress;
-    */
-    String lhost = "localhost";
-    return lhost;
-  }
-
   public boolean isValidIP(String ip) {
     String[] parts = ip.split("\\.");
 
@@ -53,37 +38,12 @@ public class Client {
     }
   }
 
-  protected int getServerPort() {
-    /*System.out.print("Input a server port: ");
-    int serverPort = ScreenShower.readInt();
-    return serverPort;
-    */
-    return 2020;
-  }
-
-  protected String getUserName() {
-    /*System.out.print("Input your name: ");
-    String username = ScreenShower.readString();
-    while (!isFirstCapital(username)) {
-      System.out.print("Your name has to start from a capital letter! ");
-      username = ScreenShower.readString();
-    }
-    return username;
-    */
-    return "__";
-  }
-
   public boolean isFirstCapital(String str) {
     char ch = str.charAt(0);
     String letter = Character.toString(ch);
     return letter.equals(letter.toUpperCase());
   }
 
-  protected SocketThread getSocketThread() {
-    SocketThread newThread = new SocketThread();
-
-    return newThread;
-  }
 
   public void runSocketThread() {
     SocketThread socketThread = getSocketThread();
@@ -109,17 +69,6 @@ public class Client {
       System.out.println("Some error occured");
     }
   }
-
-  protected void sendTextMessage(String text) {
-    try {
-      connection.send(new Message(MessageType.TEXT, text));
-
-    } catch (IOException e) {
-      System.out.println("Can not be sent");
-      clientConnected = false;
-    }
-  }
-
   public class SocketThread extends Thread {
 
     public void run() {
@@ -185,6 +134,85 @@ public class Client {
           throw new IOException("Unexpected MessageType");
         }
       }
+    }
+  }
+
+  protected String getServerAddress(){
+   // System.out.print("Input an IP: ");
+    //String ipAddress= ScreenShower.readString();
+    String lhost = "localhost";
+    return lhost;
+  }
+  protected int getServerPort() {
+    /*System.out.print("Input a server port: ");
+    int serverPort = ScreenShower.readInt();
+    return serverPort;
+    */
+    return 2020;
+  }
+
+  protected String getUserName() {
+    /*System.out.print("Input your name: ");
+    String username = ScreenShower.readString();
+    while (!isFirstCapital(username)) {
+      System.out.print("Your name has to start from a capital letter! ");
+      username = ScreenShower.readString();
+    }
+    return username;
+    */
+    return "__";
+  }
+
+  protected boolean shouldSendTextFromConsole(){
+    return true;
+  }
+  protected SocketThread getSocketThread(){
+    SocketThread newThread = new SocketThread();
+
+    return newThread;
+  }
+
+  public void run(){
+    SocketThread socketThread = getSocketThread();
+    socketThread.setDaemon(true);
+    socketThread.start();
+
+    try {
+      synchronized (this){
+        wait();
+      }
+
+    } catch (InterruptedException e) {
+      System.out.println("Thread was interrupted");
+      System.exit(1);
+    }
+
+    if(clientConnected){
+      System.out.println("Соединение установлено. Для выхода наберите команду 'exit'.");
+      while(clientConnected){
+        String usermessege = ScreenShower.readString();
+        if(usermessege=="exit"){
+          break;
+        }
+        else {
+          if(shouldSendTextFromConsole()) sendTextMessage(usermessege);
+        }
+      }
+    }
+    else{
+      System.out.println("Произошла ошибка во время работы клиента.");
+
+    }
+  }
+
+  protected void sendTextMessage(String text){
+    try {
+      connection.send(new Message(MessageType.TEXT, text));
+
+    }
+    catch (IOException e){
+      System.out.println("Can not be sended");
+      clientConnected=false;
     }
   }
 }
